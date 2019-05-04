@@ -1,5 +1,7 @@
 package others;
 
-public class Puppy {
+import javafx.scene.canvas.Canvas;
 
+public class Puppy extends Canvas {
+	
 }

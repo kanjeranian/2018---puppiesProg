@@ -26,7 +26,5 @@ public class Block {
 	public ArrayList<Rectangle> getBlock() {
 		return block;
 	}
-	
-	
 
 }
