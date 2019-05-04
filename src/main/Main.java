@@ -37,7 +37,7 @@ public class Main extends Application {
     private Node dog;
     private Node bg;
 
-    boolean running, goNorth, goSouth, goEast, goWest;
+    boolean running, goNorth, goSouth, goEast, goWest,jumping;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -63,10 +63,6 @@ public class Main extends Application {
      
         Group dogGroup = new Group(bg);
         dogGroup.getChildren().add(dog);
-//        Group bgGroup = new Group(bg);
-        
-//        Pane stackPane= new Pane();
-//        stackPane.getChildren().addAll(bg,dog);
         
        
         movedogTo(W/2, H/2-30); //ทำให้หมาอยู่ตรงกลาง
@@ -77,7 +73,11 @@ public class Main extends Application {
             @Override
             public void handle(KeyEvent event) {
                 switch (event.getCode()) {
-                    case UP:    goNorth = true; break;
+                    case UP:    {
+                    	goNorth = true;
+                    	jumping = true;
+                    	break;
+                    }
                     case DOWN:  goSouth = true; break;
                     case LEFT:  goWest  = true; break;
                     case RIGHT: goEast  = true; break;
@@ -140,7 +140,7 @@ public class Main extends Application {
         double x = width + dog.getLayoutX() + dx;
         double y = height + dog.getLayoutY() + dy;
         
-        Rectangle dogPos = new Rectangle(new Point(x, y), new Point(x+103,y+120));
+        Rectangle dogPos = new Rectangle(new Point(x-51, y-50), new Point(x+51,y+59));
         System.out.printf("%.2f %.2f\n",x,y);
         for(Rectangle b:block) {
         	if(dogPos.isOverlapping(b)) {
