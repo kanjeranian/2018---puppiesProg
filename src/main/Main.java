@@ -14,15 +14,13 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import logic.Point;
 import logic.Rectangle;
+import others.Block;
 
 /**
  * Hold down an arrow key to have your dog move around the screen.
  * Hold down the shift key to have the dog run.
  */
 public class Main extends Application {
-	
-	private ArrayList<Rectangle> block = new ArrayList<>(); 
-
     private static final double W = 1200, H = 900;
 
     private static final String DOG_IMAGE = "file:res/pom1.png";
@@ -38,18 +36,6 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-    	block.add(new Rectangle(new Point(827,139)));
-    	block.add(new Rectangle(new Point(508,206)));
-    	block.add(new Rectangle(new Point(0,240)));
-    	block.add(new Rectangle(new Point(1017,308)));
-    	block.add(new Rectangle(new Point(269,367)));
-    	block.add(new Rectangle(new Point(769,478)));
-    	block.add(new Rectangle(new Point(59,537)));
-    	block.add(new Rectangle(new Point(992,588)));
-    	block.add(new Rectangle(new Point(515,605)));
-    	block.add(new Rectangle(new Point(278,710)));
-    	block.add(new Rectangle(new Point(800,743)));
-    	block.add(new Rectangle(new Point(0,841), new Point(1200,900)));
     	
         dogImage = new Image(DOG_IMAGE); //Image
         dog = new ImageView(dogImage); //node
@@ -139,7 +125,8 @@ public class Main extends Application {
         
         Rectangle dogPos = new Rectangle(new Point(x-51, y-50), new Point(x+51,y+59));
         System.out.printf("%.2f %.2f\n",x,y);
-        for(Rectangle b:block) {
+        Block blocks = new Block();
+        for(Rectangle b:blocks.getBlock()) {
         	if(dogPos.isOverlapping(b)) {
         		return;
         	}
