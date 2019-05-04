@@ -16,7 +16,7 @@ public class Block {
     	block.add(new Rectangle(new Point(269,367)));
     	block.add(new Rectangle(new Point(769,478)));
     	block.add(new Rectangle(new Point(59,537)));
-    	block.add(new Rectangle(new Point(992,588)));
+    	block.add(new Rectangle(new Point(1051,622)));
     	block.add(new Rectangle(new Point(515,605)));
     	block.add(new Rectangle(new Point(278,710)));
     	block.add(new Rectangle(new Point(800,743)));
