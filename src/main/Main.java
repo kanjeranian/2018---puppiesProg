@@ -1,9 +1,6 @@
 package main;
 
 import java.util.ArrayList;
-
-import com.sun.javafx.iio.common.SmoothMinifier;
-
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.application.Platform;
