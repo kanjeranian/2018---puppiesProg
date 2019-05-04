@@ -23,11 +23,7 @@ import others.GameScreen;
  * Hold down the shift key to have the dog run.
  */
 public class Main extends Application {
-    private static final double W = 1200, H = 900;
-    
     private GameScreen gameScreen;
-
-    boolean running, goNorth, goSouth, goEast, goWest,jumping;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -39,17 +35,7 @@ public class Main extends Application {
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                int dx = 0, dy = 0;
-
-                if (gameScreen.isGoNorth()) dy -= 1;
-                if (gameScreen.isGoSouth()) dy += 1;
-                if (gameScreen.isGoEast())  dx += 1;
-                if (gameScreen.isGoWest())  dx -= 1;
-                if (gameScreen.isRunning()) { dx *= 13; dy *= 13; }
-//                if (gameScreen.isJumping())  dx -= 1;
-                
-
-                gameScreen.movedogBy(dx, dy);
+            	gameScreen.moveDog();
             }
         };
         

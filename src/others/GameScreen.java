@@ -72,8 +72,20 @@ public class GameScreen extends StackPane {
         });
 
 	}
+public void moveDog() {
+    int dx = 0, dy = 0;
     
-public void movedogBy(int dx, int dy) {
+    dy +=1;
+    if (goNorth) dy -= 2;
+    if (goSouth) dy += 1;
+    if (goEast)  dx += 1;
+    if (goWest)  dx -= 1;
+    if (running) { dx *= 13; dy *= 13; }
+    movedogBy(dx, dy);
+	
+}
+    
+private void movedogBy(int dx, int dy) {
     	
         if (dx == 0 && dy == 0) return;
 
@@ -116,32 +128,5 @@ public void movedogBy(int dx, int dy) {
 	public Scene getGameScreenScene() {
 		return scene;
 	}
-
-	public boolean isGoNorth() {
-		return goNorth;
-	}
-
-	public boolean isGoSouth() {
-		return goSouth;
-	}
-
-	public boolean isGoEast() {
-		return goEast;
-	}
-
-	public boolean isGoWest() {
-		return goWest;
-	}
-
-	public boolean isJumping() {
-		return jumping;
-	}
-    
-	public boolean isRunning() {
-		return running;
-	}
-    
-    
-    
 
 }
