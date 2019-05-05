@@ -29,7 +29,6 @@ public class Puppy extends PhysicsObjects {
 	private boolean isJumping,isGoLeft,isCollide;
 	
 	
-	
 	public Puppy(double x, double y, double width, double height) {
 		super(x, y);
 		this.width = width;
@@ -40,13 +39,11 @@ public class Puppy extends PhysicsObjects {
 		hitboxFeet = new Rectangle(new Point(x, y+height/5*4), new Point(x+width, y+height));
 		hitboxLeft = new Rectangle(new Point(x, y), new Point(x+10, y+height-20));
 		hitboxRight = new Rectangle(new Point(x+width-10, y), new Point(x+width, y+height-20));
-
 	}
 	
 	public Rectangle getHitbox() {
 		return hitbox;
 	}
-	
 	
 	public Rectangle getHitboxHead() {
 		return hitboxHead;
