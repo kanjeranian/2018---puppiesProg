@@ -77,22 +77,28 @@ public class GameScreen extends StackPane {
     
     
 	public void update() {
-		player1.update();
+		if (goUp) player1.jump();
+		if (goLeft) { 
+			player1.goLeft();
+			player1.setDogIMG(true);
+		}
+		if (goRight) { 
+			player1.goRight();
+			player1.setDogIMG(false);
+		}
+		
 		for (Rectangle r: blocks.getBlock()) {
 			if(player1.getHitbox().isOverlapping(r)) {
-				player1.onCollide();
+				if(player1.getHitboxHead().isOverlapping(r)) {
+					player1.onCollideTop();
+				}
+				if(player1.getHitboxFeet().isOverlapping(r)) {
+					player1.onCollideDown();
+				}
 			}	
 		}
 		
-		if (goUp) player1.jump();
-		if (goLeft) { 
-			player1.setPosX(player1.getPosX()-1);
-			player1.setDogIMG(true);
-			}
-		if (goRight) { 
-			player1.setPosX(player1.getPosX()+1);
-			player1.setDogIMG(false);
-			}
+		player1.update();
 		
 	}
 	    
@@ -106,13 +112,12 @@ public class GameScreen extends StackPane {
 		gc.clearRect(0, 0, W, H);
 		gc.drawImage(bgImage, 0, 0);
 		player1.render(gc);
-//		gc.drawImage(dogImage, player1.getPosX(), player1.getPosY());
 		gc.setStroke(Color.RED);
 		gc.setLineWidth(5);
-		for (Rectangle r: blocks.getBlock()) {
-			drawRectHitBox(r);
-		}
-		drawRectHitBox(player1.getHitbox());
+//		for (Rectangle r: blocks.getBlock()) {
+//			drawRectHitBox(r);
+//		}
+//		drawRectHitBox(player1.getHitbox());
 	}
 	
 	public Scene getGameScene() {

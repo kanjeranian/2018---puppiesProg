@@ -7,6 +7,7 @@ import javafx.scene.image.Image;
 import logic.PhysicsObjects;
 import logic.Point;
 import logic.Rectangle;
+import others.Block;
 
 public class Puppy extends PhysicsObjects {
 	
@@ -16,10 +17,14 @@ public class Puppy extends PhysicsObjects {
 	private Rectangle hitbox = new Rectangle(new Point(0, 0));
 	private Rectangle hitboxHead = new Rectangle(new Point(0, 0));
 	private Rectangle hitboxFeet = new Rectangle(new Point(0, 0));
+	private Rectangle hitboxLeft = new Rectangle(new Point(0, 0));
+	private Rectangle hitboxRight = new Rectangle(new Point(0, 0));
+	
 	private double width;
 	private double height;
+	private Block blocks = new Block();
 	
-	private boolean isJumping,isGoLeft;
+	private boolean isJumping,isGoLeft,isCollide;
 	
 	
 	
@@ -29,8 +34,10 @@ public class Puppy extends PhysicsObjects {
 		this.height = height;
 		updateAllHitbox(x, y, width, height);
 		hitbox = new Rectangle(new Point(x, y), new Point(x+width, y+height));
-		hitboxHead = new Rectangle(new Point(x, y), new Point(x+width, y+height/2));
-		hitboxFeet = new Rectangle(new Point(x, y+height/2), new Point(x+width, y+height));
+		hitboxHead = new Rectangle(new Point(x, y), new Point(x+width, y+height/5*4));
+		hitboxFeet = new Rectangle(new Point(x, y+height/5*4), new Point(x+width, y+height));
+		hitboxLeft = new Rectangle(new Point(x, y), new Point(x+10, y+height-20));
+		hitboxRight = new Rectangle(new Point(x+width-10, y), new Point(x+width, y+height-20));
 
 	}
 	
@@ -38,34 +45,70 @@ public class Puppy extends PhysicsObjects {
 		return hitbox;
 	}
 	
+	
+	public Rectangle getHitboxHead() {
+		return hitboxHead;
+	}
+
+
+	public Rectangle getHitboxFeet() {
+		return hitboxFeet;
+	}
+
 	public void updateAllHitbox(double x,double y,double width, double height) {
 		hitbox.setRectangle(x, y, width, height);
 		hitboxHead.setRectangle(x, y, width, height/2);
-		hitboxFeet.setRectangle(x, y+height/2, width, height);
+		hitboxFeet.setRectangle(x, y+height/2, width, height/2);
+		hitboxLeft.setRectangle(x, y, 10, height-20);
+		hitboxRight.setRectangle(x+width-10, y, 10, height-20);
 	}
 	
-	@Override 
+//	@Override 
 	public void update() {
-		super.update();
-		updateAllHitbox(getPosX(), getPosY(), width, height);
+		super.update(this); //update physics object
+		updateAllHitbox(getX(), getY(), width, height);
 	}
 		
 	public void jump() {
 		if (!isJumping) {
-			accelerate(0, -20); 
+			accelerate(0, -20); //กระโดด acc ต้องชนะ gravity
 			isJumping=true;
 		}
 	}
 	
-	public void onCollide() {
+	public void goLeft() {
+		for (Rectangle r:blocks.getBlock()) {
+			if(hitboxLeft.isOverlapping(r)) return;
+		}
+		setX(getX()-2);
+	}
+	
+	public void goRight() {
+		for (Rectangle r:blocks.getBlock()) {
+			if(hitboxRight.isOverlapping(r)) return;
+		}
+		setX(getX()+2);
+	}
+	
+	public void onCollideTop() {
+		setSpeedY(getSpeedY()>0?getSpeedY():0);
+		setSpeedX(0);
 		
-		setSpeedY(0);
+	}
+	
+	public void onCollideDown() {
+		setSpeedY(getSpeedY()<0?getSpeedY():0);
 		isJumping=false;
+
+	}
+	
+	public void onCollideSide() {
+		setSpeedX(0);
 	}
 
 	
 	public void render(GraphicsContext gc) {
-		gc.drawImage(dogIMG, getPosX(), getPosY());
+		gc.drawImage(dogIMG, getX(), getY());
 	}
 	
 	public void setDogIMG(boolean goLeft) {
@@ -77,5 +120,18 @@ public class Puppy extends PhysicsObjects {
 		System.out.println("Right");
 		dogIMG = DOG_IMAGE_RIGHT;
 	}
+
+	public boolean getIscollide() {
+		return isCollide;
+	}
+
+	public double getWidth() {
+		return width;
+	}
+
+	public double getHeight() {
+		return height;
+	}
+	
 	
 }
