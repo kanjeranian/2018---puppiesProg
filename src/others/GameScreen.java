@@ -1,5 +1,6 @@
 package others;
 
+import character.Ghost;
 import character.Puppy;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -40,7 +41,7 @@ public class GameScreen extends StackPane {
     private Image ghostImage = new Image(GHOST_IMAGE);
     
     private Puppy player1 = new Puppy(W/2, H/2, dogImage.getWidth(), dogImage.getHeight(),1);
-    
+    private Ghost ghost1 = new Ghost(3);
     
     
     //con สร้าง canvas+ปากกา ยัดใส่ rootPane , ดูว่ากดหรือปล่อยปุ่ม
@@ -82,25 +83,28 @@ public class GameScreen extends StackPane {
     
 	public void update() {
 		player1.update(goUp,goLeft,goRight);
+		ghost1.update(player1);
 	}
 	    
+	public void draw() {
+		gc.drawImage(bgImage, 0, 0);
+		player1.draw(gc);
+		ghost1.draw(gc);
+	}
 	
+	public void drawHitbox() {
+		gc.setStroke(Color.RED);
+		gc.setLineWidth(5);
+		for (Rectangle r: blocks.getBlock()) {
+			drawRectHitBox(r);
+		}
+		drawRectHitBox(player1.getHitbox());
+	}
 	private void drawRectHitBox(Rectangle r) {
 		Point tl = r.getTopLeft(), br = r.getBottomRight();
 		gc.strokeRect(tl.getX(), tl.getY(), br.getX()-tl.getX(), br.getY()-tl.getY());
 	}
 	
-	public void draw() {
-		gc.clearRect(0, 0, W, H);
-		gc.drawImage(bgImage, 0, 0);
-		player1.draw(gc);
-		gc.setStroke(Color.RED);
-		gc.setLineWidth(5);
-//		for (Rectangle r: blocks.getBlock()) {
-//			drawRectHitBox(r);
-//		}
-//		drawRectHitBox(player1.getHitbox());
-	}
 	
 	public Scene getGameScene() {
 		return scene;

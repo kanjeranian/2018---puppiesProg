@@ -69,11 +69,10 @@ public class Puppy extends PhysicsObjects implements IRenderable {
 	}
 	
 	public void checkForUpdate(boolean goUp,boolean goLeft, boolean goRight) {
-		if(goUp) jump();
-		if(goLeft) goLeft();
+		if(goUp) 	jump();
+		if(goLeft) 	goLeft();
 		if(goRight) goRight();
 
-		
 		for (Rectangle r: blocks.getBlock()) {
 			if(hitbox.isOverlapping(r)) {
 				if(hitboxHead.isOverlapping(r)) onCollideTop();
@@ -82,7 +81,6 @@ public class Puppy extends PhysicsObjects implements IRenderable {
 		}	
 	}
 	
-//	@Override 
 	public void update(boolean goUp,boolean goLeft, boolean goRight) {
 		checkForUpdate(goUp,goLeft,goRight);
 		super.update(this); //update physics object
@@ -171,6 +169,8 @@ public class Puppy extends PhysicsObjects implements IRenderable {
 	public boolean isVisible() {
 		return is_visible;
 	}
+	
+
 	
 	
 }
