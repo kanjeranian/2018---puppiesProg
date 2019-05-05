@@ -13,7 +13,8 @@ public class Puppy extends PhysicsObjects {
 	
 	private static final Image DOG_IMAGE_LEFT = new Image("file:res/pom1.png");
 	private static final Image DOG_IMAGE_RIGHT = new Image("file:res/pom12.png");
-	private Image dogIMG = DOG_IMAGE_RIGHT;
+	private Image dogIMG = DOG_IMAGE_RIGHT; //เอาไว้เลือกว่าจะใช้ left หรือ right
+	
 	private Rectangle hitbox = new Rectangle(new Point(0, 0));
 	private Rectangle hitboxHead = new Rectangle(new Point(0, 0));
 	private Rectangle hitboxFeet = new Rectangle(new Point(0, 0));
@@ -22,6 +23,7 @@ public class Puppy extends PhysicsObjects {
 	
 	private double width;
 	private double height;
+	
 	private Block blocks = new Block();
 	
 	private boolean isJumping,isGoLeft,isCollide;
