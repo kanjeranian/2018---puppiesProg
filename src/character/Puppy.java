@@ -12,7 +12,7 @@ import others.Block;
 
 public class Puppy extends PhysicsObjects implements IRenderable {
 	
-	private int z;
+	private double z;
 	private boolean is_visible, is_destroyed;
 	
 	private static final Image DOG_IMAGE_LEFT = new Image("file:res/pom1.png");
@@ -32,12 +32,16 @@ public class Puppy extends PhysicsObjects implements IRenderable {
 	
 	private boolean isJumping,isGoLeft,isCollide;
 	
+	private Hp hp;
+	
 	
 	public Puppy(double x, double y, double width, double height,int z) {
 		super(x, y);
+		this.z=z;
+		hp = new Hp(x-4,y-36,z+0.5);
+		
 		this.width = width;
 		this.height = height;
-		this.z=z;
 		
 		updateAllHitbox(x, y, width, height);
 		hitbox = new Rectangle(new Point(x, y), new Point(x+width, y+height));
@@ -85,6 +89,11 @@ public class Puppy extends PhysicsObjects implements IRenderable {
 		checkForUpdate(goUp,goLeft,goRight);
 		super.update(this); //update physics object
 		updateAllHitbox(getX(), getY(), width, height);
+		hp.setPoint(getX()+3,getY()-36);
+//		if(goLeft) hp.setPoint(getX()+8,getY()-36);
+//		else {
+//			hp.setPoint(getX()+13,getY()-36);
+//		}
 	}
 		
 	public void jump() {
@@ -99,7 +108,8 @@ public class Puppy extends PhysicsObjects implements IRenderable {
 		for (Rectangle r:blocks.getBlock()) {
 			if(hitboxLeft.isOverlapping(r)) return;
 		}
-		setX(getX()-2);
+		setX(getX()-2.5);
+		isGoLeft=true;
 	}
 	
 	public void goRight() {
@@ -107,7 +117,8 @@ public class Puppy extends PhysicsObjects implements IRenderable {
 		for (Rectangle r:blocks.getBlock()) {
 			if(hitboxRight.isOverlapping(r)) return;
 		}
-		setX(getX()+2);
+		setX(getX()+2.5);
+		isGoLeft=false;
 	}
 	
 	public void onCollideTop() {
@@ -150,14 +161,14 @@ public class Puppy extends PhysicsObjects implements IRenderable {
 	}
 
 	@Override
-	public int getZ() {
+	public double getZ() {
 		return z;
 	}
 
 	@Override
 	public void draw(GraphicsContext gc) { //same as render
 		gc.drawImage(dogIMG, getX(), getY());
-		
+		hp.draw(gc);
 	}
 
 	@Override

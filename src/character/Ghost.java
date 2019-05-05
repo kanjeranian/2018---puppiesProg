@@ -10,10 +10,11 @@ import SharedObject.IRenderable;
 
 public class Ghost implements IRenderable {
 	
-	private int z;
+	private double z;
+	private double x,y;
 	private boolean is_visible, is_destroyed;
-	
 	private static final double W = 178, H=216;
+	
 	private static final Image GHOST_IMAGE_LEFT = new Image("file:res/ghostL.png");
 	private static final Image GHOST_IMAGE_Right = new Image("file:res/ghostR.png");
 	private Image ghostIMG = GHOST_IMAGE_LEFT;
@@ -26,8 +27,6 @@ public class Ghost implements IRenderable {
 	
 	private double width=W;
 	private double height=H;
-	private int x;
-	private int y;
 	private double speed;
 
 	
@@ -42,19 +41,19 @@ public class Ghost implements IRenderable {
 	
 	public void moveToPup(Puppy puppy) {
 		if(puppy.getX()>x) { 
-			x+=1;
+			x+=speed;
 			ghostIMG = GHOST_IMAGE_Right;
 		}
 		if(puppy.getX()<x) { 
-			x-=1;
+			x-=speed;
 			ghostIMG = GHOST_IMAGE_LEFT;
 		}
-		if(puppy.getY()>y) y+=1;
-		if(puppy.getY()<y) y-=1;
+		if(puppy.getY()>y) y+=speed;
+		if(puppy.getY()<y) y-=speed;
 	}
 
 	@Override
-	public int getZ() {
+	public double getZ() {
 		return z;
 	}
 
