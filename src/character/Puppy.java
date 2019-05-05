@@ -37,6 +37,10 @@ public class Puppy extends PhysicsObjects {
 		return hitbox;
 	}
 	
+	public void updateHitbox() {
+		
+	}
+	
 	@Override 
 	public void update() {
 		super.update();

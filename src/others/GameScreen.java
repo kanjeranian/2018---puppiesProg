@@ -19,8 +19,6 @@ import logic.Rectangle;
 
 public class GameScreen extends StackPane {
 	
-	private double speed = 0;
-	
 	private static final double W = 1200, H = 900;
     private static final String DOG_IMAGE = "file:res/pom1.png";
     private static final String BG_IMAGE = "file:res/bg.png";
@@ -38,17 +36,11 @@ public class GameScreen extends StackPane {
     private Image dogImage = new Image(DOG_IMAGE);
     private Puppy player1 = new Puppy(W/2, H/2, dogImage.getWidth(), dogImage.getHeight());
     private Block blocks = new Block();
+    
+    
+    
+    //con สร้าง canvas+ปากกา ยัดใส่ rootPane , ดูว่ากดหรือปล่อยปุ่ม
     public GameScreen() {
-//        dogImage = new Image(DOG_IMAGE); //Image
-//        dog = new ImageView(dogImage); //node
-//        
-//        bgImage = new Image(BG_IMAGE);
-//        bg = new ImageView(bgImage);
-//        
-//        Group dogGroup = new Group(bg);
-//        dogGroup.getChildren().add(dog);
-//        
-//        movedogTo(W/2, H/2); //ทำให้หมาอยู่ตรงกลาง (ตำแหน่งน้องหมายึดจาก center ของน้องหมาเลย)
     	Canvas cv = new Canvas(W, H);
     	gc = cv.getGraphicsContext2D();
     	Pane root = new Pane(cv);
@@ -82,6 +74,8 @@ public class GameScreen extends StackPane {
         });
 
 	}
+    
+    
 	public void update() {
 		player1.update();
 		for (Rectangle r: blocks.getBlock()) {
