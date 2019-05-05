@@ -22,20 +22,24 @@ public class GameScreen extends StackPane {
 	private static final double W = 1200, H = 900;
     private static final String DOG_IMAGE = "file:res/pom1.png";
     private static final String BG_IMAGE = "file:res/bg.png";
-
+    private static final String GHOST_IMAGE = "file:res/ghostL.png";
 
     private Node dog;
     private Node bg;
+    private Node ghost;
     private Scene scene;
     
     boolean running, goUp, goDown, goRight, goLeft;
+    private Block blocks = new Block();
     
     // -- my code
     private GraphicsContext gc;
+
     private Image bgImage = new Image(BG_IMAGE);
     private Image dogImage = new Image(DOG_IMAGE);
-    private Puppy player1 = new Puppy(W/2, H/2, dogImage.getWidth(), dogImage.getHeight());
-    private Block blocks = new Block();
+    private Image ghostImage = new Image(GHOST_IMAGE);
+    
+    private Puppy player1 = new Puppy(W/2, H/2, dogImage.getWidth(), dogImage.getHeight(),1);
     
     
     
@@ -77,29 +81,7 @@ public class GameScreen extends StackPane {
     
     
 	public void update() {
-		if (goUp) player1.jump();
-		if (goLeft) { 
-			player1.goLeft();
-			player1.setDogIMG(true);
-		}
-		if (goRight) { 
-			player1.goRight();
-			player1.setDogIMG(false);
-		}
-		
-		for (Rectangle r: blocks.getBlock()) {
-			if(player1.getHitbox().isOverlapping(r)) {
-				if(player1.getHitboxHead().isOverlapping(r)) {
-					player1.onCollideTop();
-				}
-				if(player1.getHitboxFeet().isOverlapping(r)) {
-					player1.onCollideDown();
-				}
-			}	
-		}
-		
-		player1.update();
-		
+		player1.update(goUp,goLeft,goRight);
 	}
 	    
 	
@@ -111,7 +93,7 @@ public class GameScreen extends StackPane {
 	public void draw() {
 		gc.clearRect(0, 0, W, H);
 		gc.drawImage(bgImage, 0, 0);
-		player1.render(gc);
+		player1.draw(gc);
 		gc.setStroke(Color.RED);
 		gc.setLineWidth(5);
 //		for (Rectangle r: blocks.getBlock()) {

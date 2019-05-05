@@ -7,6 +7,7 @@ import java.lang.Math;
 public class PhysicsObjects {
 //    public static final double FRICTION = 0.99;
 	public static final double GRAVITY = 3;
+	private static final Block blocks = new Block(); 
 	private double x;
 	private double y;
 	private double speedX = 0;
@@ -30,7 +31,6 @@ public class PhysicsObjects {
 //			if ()
 //		}
 		x += speedX;
-		Block blocks = new Block();
         if(speedY>0) {
         	for (int i = 0; i < Math.abs(speedY); i++) {
         		y += 1;
