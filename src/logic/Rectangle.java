@@ -43,11 +43,11 @@ public class Rectangle {
 		this.bottomRight = bottomRight;
 	}
 	
-	public void setRectangle(double x,double y,double w, double h) {
+	public void setRectangle(double x,double y,double width, double height) {
 		this.getTopLeft().setX(x);
 		this.getTopLeft().setY(y);
-		this.getBottomRight().setX(x+w);
-		this.getBottomRight().setY(y+h);
+		this.getBottomRight().setX(x+width);
+		this.getBottomRight().setY(y+height);
 	}
 	
 	

@@ -13,9 +13,9 @@ public class Puppy extends PhysicsObjects {
 	private static final Image DOG_IMAGE_LEFT = new Image("file:res/pom1.png");
 	private static final Image DOG_IMAGE_RIGHT = new Image("file:res/pom12.png");
 	private Image dogIMG = DOG_IMAGE_RIGHT;
-	private Rectangle hitbox;
-	private Rectangle hitboxHead;
-	private Rectangle hitboxFeet;
+	private Rectangle hitbox = new Rectangle(new Point(0, 0));
+	private Rectangle hitboxHead = new Rectangle(new Point(0, 0));
+	private Rectangle hitboxFeet = new Rectangle(new Point(0, 0));
 	private double width;
 	private double height;
 	
@@ -23,13 +23,14 @@ public class Puppy extends PhysicsObjects {
 	
 	
 	
-	public Puppy(double posX, double posY, double width, double height) {
-		super(posX, posY);
+	public Puppy(double x, double y, double width, double height) {
+		super(x, y);
 		this.width = width;
 		this.height = height;
-		hitbox = new Rectangle(new Point(posX, posY), new Point(posX+width, posY+height));
-		hitboxHead = new Rectangle(new Point(posX, posY), new Point(posX+width, posY+height/2));
-		hitboxFeet = new Rectangle(new Point(posX, posY+height/2), new Point(posX+width, posY+height));
+		updateAllHitbox(x, y, width, height);
+		hitbox = new Rectangle(new Point(x, y), new Point(x+width, y+height));
+		hitboxHead = new Rectangle(new Point(x, y), new Point(x+width, y+height/2));
+		hitboxFeet = new Rectangle(new Point(x, y+height/2), new Point(x+width, y+height));
 
 	}
 	
@@ -37,17 +38,16 @@ public class Puppy extends PhysicsObjects {
 		return hitbox;
 	}
 	
-	public void updateHitbox() {
-		
+	public void updateAllHitbox(double x,double y,double width, double height) {
+		hitbox.setRectangle(x, y, width, height);
+		hitboxHead.setRectangle(x, y, width, height/2);
+		hitboxFeet.setRectangle(x, y+height/2, width, height);
 	}
 	
 	@Override 
 	public void update() {
 		super.update();
-		hitbox.getTopLeft().setX(getPosX());
-		hitbox.getTopLeft().setY(getPosY());
-		hitbox.getBottomRight().setX(getPosX()+width);
-		hitbox.getBottomRight().setY(getPosY()+height);
+		updateAllHitbox(getPosX(), getPosY(), width, height);
 	}
 		
 	public void jump() {
