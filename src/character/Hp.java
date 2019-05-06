@@ -12,6 +12,10 @@ public class Hp implements IRenderable {
 	private static final double W = 89, H=19;
 	private boolean is_visible, is_destroyed;
 	
+	private static final Color GHOST_BLOOD = Color.rgb(209,40,84);
+	private static final Color PUPPY_BLOOD = Color.rgb(43,127,95);
+	private Color blood;
+	
 	private double hp;
 	
 	
@@ -33,9 +37,15 @@ public class Hp implements IRenderable {
 	public void draw(GraphicsContext gc) {
 		gc.setFill(Color.rgb(201, 199, 197));
 		gc.fillRoundRect(x, y, W, H, 20, 20);
-		gc.setFill(Color.rgb(43,127,95));
+		gc.setFill(blood);
 		gc.fillRoundRect(x, y, W*hp/100, H, 20, 20);
 
+	}
+	
+	public void draw(GraphicsContext gc,IRenderable iRenderable) {
+		blood = iRenderable instanceof Ghost?GHOST_BLOOD : PUPPY_BLOOD;
+		draw(gc);
+		
 	}
 
 

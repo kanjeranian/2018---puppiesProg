@@ -12,7 +12,7 @@
   </class>  
   <class id="2" language="java" name="logic.Rectangle" project="2110215_Project_2018_puppiesProg" 
     file="/2110215_Project_2018_puppiesProg/src/logic/Rectangle.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="30" y="374"/>    
+    <position height="-1" width="-1" x="-59" y="382"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -39,7 +39,7 @@
   </class>  
   <class id="5" language="java" name="character.Puppy" project="2110215_Project_2018_puppiesProg" 
     file="/2110215_Project_2018_puppiesProg/src/character/Puppy.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="470" y="587"/>    
+    <position height="-1" width="-1" x="540" y="816"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -48,14 +48,32 @@
   </class>  
   <class id="6" language="java" name="others.GameScreen" project="2110215_Project_2018_puppiesProg" 
     file="/2110215_Project_2018_puppiesProg/src/others/GameScreen.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="472" y="149"/>    
+    <position height="-1" width="-1" x="280" y="-233"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <generalization id="7">    
+  <class id="7" language="java" name="character.Ghost" project="2110215_Project_2018_puppiesProg" 
+    file="/2110215_Project_2018_puppiesProg/src/character/Ghost.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="515" width="189" x="728" y="442"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="character.Character" project="2110215_Project_2018_puppiesProg" 
+    file="/2110215_Project_2018_puppiesProg/src/character/Character.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="685" y="215"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <generalization id="9">    
     <end type="SOURCE" refId="5"/>    
     <end type="TARGET" refId="1"/>  
   </generalization>  

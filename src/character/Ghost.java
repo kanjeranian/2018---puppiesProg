@@ -28,25 +28,38 @@ public class Ghost implements IRenderable {
 	private double width=W;
 	private double height=H;
 	private double speed;
+	
+	private Hp hp;
+	private boolean isLeft;
 
 	
 	public Ghost(int z) {
 		this.z = z;
 		speed = 0.5;
+		
+		hp = new Hp(x+28,y-39,z+0.5);
 	}
 	
 	public void update(Puppy puppy) {
-		moveToPup(puppy);
+		moveToPup(puppy);		
+		if(isLeft==true) {
+			hp.setPoint(x+28, y-39);
+			return;
+		}
+		hp.setPoint(x+57, y-39);
 	}
+
 	
 	public void moveToPup(Puppy puppy) {
 		if(puppy.getX()>x) { 
 			x+=speed;
 			ghostIMG = GHOST_IMAGE_Right;
+			isLeft=false;
 		}
 		if(puppy.getX()<x) { 
 			x-=speed;
 			ghostIMG = GHOST_IMAGE_LEFT;
+			isLeft=true;
 		}
 		if(puppy.getY()>y) y+=speed;
 		if(puppy.getY()<y) y-=speed;
@@ -60,6 +73,7 @@ public class Ghost implements IRenderable {
 	@Override
 	public void draw(GraphicsContext gc) {
 		gc.drawImage(ghostIMG, x, y);		
+		hp.draw(gc,(IRenderable)this);
 	}
 
 	@Override

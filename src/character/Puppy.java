@@ -168,7 +168,7 @@ public class Puppy extends PhysicsObjects implements IRenderable {
 	@Override
 	public void draw(GraphicsContext gc) { //same as render
 		gc.drawImage(dogIMG, getX(), getY());
-		hp.draw(gc);
+		hp.draw(gc,(IRenderable) this);
 	}
 
 	@Override
