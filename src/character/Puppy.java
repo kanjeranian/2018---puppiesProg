@@ -5,6 +5,8 @@ package character;
 import java.util.ArrayList;
 
 import SharedObject.IRenderable;
+import item.BlueBall;
+import item.Item;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import logic.PhysicsObjects;
@@ -39,6 +41,8 @@ public class Puppy extends PhysicsObjects implements IRenderable,Fightable {
 	private boolean firstDead = true;
 	
 	private Hp hp;
+	private Item item = new BlueBall(getX()/2, getY()/2, z+0.1,true, false, isGoLeft);
+	private ArrayList<Item> releaseItem = new ArrayList<>();
 	
 	
 	public Puppy(double x, double y, double width, double height,int z) {
@@ -91,12 +95,16 @@ public class Puppy extends PhysicsObjects implements IRenderable,Fightable {
 		}	
 	}
 	
-	public void update(boolean goUp,boolean goLeft, boolean goRight) {
+	public void update(boolean goUp,boolean goLeft, boolean goRight, boolean attacking) {
 		if(hp.getHp()>0) {
-			checkForUpdate(goUp,goLeft,goRight); 
+			checkForUpdate(goUp,goLeft,goRight);
+			if(attacking) attack();
 			super.update(this); //update physics object
 			updateAllHitbox(getX(), getY(), width, height);
-			hp.setPoint(getX()+3,getY()-36);	
+			hp.setPoint(getX()+3,getY()-36);
+			for(Item i:releaseItem) {
+				i.update();
+			}
 			return;
 		}
 		if(firstDead) { 
@@ -104,6 +112,13 @@ public class Puppy extends PhysicsObjects implements IRenderable,Fightable {
 			firstDead = false;
 		}
 		dogIMG = deadLeft? DOG_IMAGE_LEFT_DEAD:DOG_IMAGE_RIGHT_DEAD;
+	}
+	
+	public void attack() {
+		if(item == null) return;
+		Item i = null; 
+		if(item instanceof BlueBall) i = new BlueBall(getX()+width/2, getY()+height/2, z+0.1,true, false, isGoLeft);
+		releaseItem.add((Item)i);
 	}
 	
 	public boolean wasHauntedBy(Ghost ghost) {
@@ -188,6 +203,9 @@ public class Puppy extends PhysicsObjects implements IRenderable,Fightable {
 	public void draw(GraphicsContext gc) { //same as render
 		gc.drawImage(dogIMG, getX(), getY());
 		hp.draw(gc,(IRenderable) this);
+		for(Item i:releaseItem) {
+			i.draw(gc);
+		}
 	}
 
 	@Override

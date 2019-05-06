@@ -49,6 +49,10 @@ public abstract class Item implements IRenderable {
 		return is_visible;
 	}
 	
+	public void update() {
+		x=goLeft?x-3:x+3;
+	}
+	
 	
 	
 

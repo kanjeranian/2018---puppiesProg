@@ -32,7 +32,7 @@ public class GameScreen extends StackPane {
     private Node ghost;
     private Scene scene;
     
-    boolean running, goUp, goDown, goRight, goLeft;
+    boolean running, goUp, goDown, goRight, goLeft, attacking;
     private ArrayList<Hitbox> blocks = Block.getBlocks();    
     
     // -- my code
@@ -65,6 +65,7 @@ public class GameScreen extends StackPane {
                     case LEFT:  goLeft  = true; break;
                     case RIGHT: goRight = true; break;
                     case SHIFT: running = true; break;
+                    case ENTER: attacking = true; break;
                 }
             }
         });
@@ -78,6 +79,7 @@ public class GameScreen extends StackPane {
                     case LEFT:  goLeft  = false; break;
                     case RIGHT: goRight  = false; break;
                     case SHIFT: running = false; break;
+                    case ENTER: attacking = false; break;
                 }
             }
         });
@@ -86,7 +88,7 @@ public class GameScreen extends StackPane {
     
     
 	public void update() {
-		player1.update(goUp,goLeft,goRight);
+		player1.update(goUp,goLeft,goRight,attacking);
 		ghost1.update(player1);
 		if(player1.wasHauntedBy(ghost1)) {
 			player1.wasDestroyed();
