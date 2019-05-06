@@ -17,7 +17,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import logic.Point;
-import logic.Rectangle;
+import logic.Hitbox;
 import others.Block;
 import others.GameScreen;
 

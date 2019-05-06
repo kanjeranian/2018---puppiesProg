@@ -2,29 +2,75 @@ package others;
 
 import java.util.ArrayList;
 
+import SharedObject.IRenderable;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 import logic.Point;
-import logic.Rectangle;
+import logic.Hitbox;
 
-public class Block {
-	private ArrayList<Rectangle> block = new ArrayList<>(); 
+public class Block implements IRenderable{
 	
-	public Block() {
-		block.add(new Rectangle(new Point(827,139)));
-    	block.add(new Rectangle(new Point(508,206)));
-    	block.add(new Rectangle(new Point(0,240)));
-    	block.add(new Rectangle(new Point(1017,308)));
-    	block.add(new Rectangle(new Point(269,367)));
-    	block.add(new Rectangle(new Point(769,478)));
-    	block.add(new Rectangle(new Point(59,537)));
-    	block.add(new Rectangle(new Point(1051,622)));
-    	block.add(new Rectangle(new Point(515,605)));
-    	block.add(new Rectangle(new Point(278,710)));
-    	block.add(new Rectangle(new Point(800,743)));
-    	block.add(new Rectangle(new Point(0,841), new Point(1200,900)));
+	private double z;
+	private boolean is_visible, is_destroyed;
+
+	private static final Block instance = new Block();
+	private static final double WIDTH = 149,HEIGHT=34;
+	private ArrayList<Hitbox> blocks = new ArrayList<>(); 
+	
+	private Block() {
+		// 11 อันนี้คือตำแหน่งเริ่มต้นของ แต่ละ platform สามารถขยับได้
+		addBlock(827,139);
+	   	addBlock(508,206);
+	   	addBlock(0,240);
+	   	addBlock(1017,308);
+	   	addBlock(269,367);
+	   	addBlock(769,478);
+	   	addBlock(59,537);
+	   	addBlock(1051,622);
+	   	addBlock(515,605);
+	   	addBlock(278,710);
+	   	addBlock(800,743);
+	   	blocks.add(new Hitbox(new Point(0,841), new Point(1200,900))); //อันนี้คือพื้น
+    	
+	}
+	
+	private void addBlock(double x,double y) {
+		blocks.add(new Hitbox(x, y, WIDTH, HEIGHT));
+	}
+	
+	public static Block getBlockInstance() {
+		return instance;
+	}
+	
+	public static ArrayList<Hitbox> getBlocks() {
+		return  instance.blocks;
 	}
 
-	public ArrayList<Rectangle> getBlock() {
-		return block;
+	@Override
+	public double getZ() {
+		return 0;
 	}
+
+	@Override
+	public void draw(GraphicsContext gc) {
+		gc.setFill(Color.rgb(43,51,51));
+		for(Hitbox block:instance.blocks) {
+			gc.fillRect(block.getX(), block.getY(), WIDTH, HEIGHT);
+		}
+	}
+
+	@Override
+	public boolean isDestroyed() {
+		// TODO Auto-generated method stub
+		return is_destroyed;
+	}
+
+	@Override
+	public boolean isVisible() {
+		// TODO Auto-generated method stub
+		return is_visible;
+	}
+	
+	
 
 }

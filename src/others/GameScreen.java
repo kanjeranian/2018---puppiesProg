@@ -1,5 +1,7 @@
 package others;
 
+import java.util.ArrayList;
+
 import character.Ghost;
 import character.Puppy;
 import javafx.event.EventHandler;
@@ -16,7 +18,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import logic.Point;
-import logic.Rectangle;
+import logic.Hitbox;
 
 public class GameScreen extends StackPane {
 	
@@ -31,7 +33,7 @@ public class GameScreen extends StackPane {
     private Scene scene;
     
     boolean running, goUp, goDown, goRight, goLeft;
-    private Block blocks = new Block();
+    private ArrayList<Hitbox> blocks = Block.getBlocks();    
     
     // -- my code
     private GraphicsContext gc;
@@ -40,8 +42,10 @@ public class GameScreen extends StackPane {
     private Image dogImage = new Image(DOG_IMAGE);
     private Image ghostImage = new Image(GHOST_IMAGE);
     
+    private Block allBlocks = Block.getBlockInstance();
     private Puppy player1 = new Puppy(W/2, H/2, dogImage.getWidth(), dogImage.getHeight(),1);
     private Ghost ghost1 = new Ghost(3);
+    
     
     
     //con สร้าง canvas+ปากกา ยัดใส่ rootPane , ดูว่ากดหรือปล่อยปุ่ม
@@ -84,23 +88,29 @@ public class GameScreen extends StackPane {
 	public void update() {
 		player1.update(goUp,goLeft,goRight);
 		ghost1.update(player1);
+		if(player1.wasHauntedBy(ghost1)) {
+			player1.wasDestroyed();
+		}
 	}
 	    
 	public void draw() {
 		gc.drawImage(bgImage, 0, 0);
+		allBlocks.draw(gc);
 		player1.draw(gc);
 		ghost1.draw(gc);
+		drawHitbox();
 	}
 	
 	public void drawHitbox() {
 		gc.setStroke(Color.RED);
 		gc.setLineWidth(5);
-		for (Rectangle r: blocks.getBlock()) {
+		for (Hitbox r: blocks) {
 			drawRectHitBox(r);
 		}
 		drawRectHitBox(player1.getHitbox());
+		drawRectHitBox(ghost1.getHitbox());
 	}
-	private void drawRectHitBox(Rectangle r) {
+	private void drawRectHitBox(Hitbox r) {
 		Point tl = r.getTopLeft(), br = r.getBottomRight();
 		gc.strokeRect(tl.getX(), tl.getY(), br.getX()-tl.getX(), br.getY()-tl.getY());
 	}

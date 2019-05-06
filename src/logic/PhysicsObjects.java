@@ -3,11 +3,12 @@ package logic;
 import character.Puppy;
 import others.Block;
 import java.lang.Math;
+import java.util.ArrayList;
 
 public class PhysicsObjects {
 //    public static final double FRICTION = 0.99;
 	public static final double GRAVITY = 3;
-	private static final Block blocks = new Block(); 
+    private ArrayList<Hitbox> blocks = Block.getBlocks();   
 	private double x;
 	private double y;
 	private double speedX = 0;
@@ -26,16 +27,13 @@ public class PhysicsObjects {
 	
 
 	public void move(Puppy puppy) {
-//		double signx = Math.signum(speedX);
-//		for (double i=0; Math.abs(i) < speedX; i += signx) {
-//			if ()
-//		}
 		x += speedX;
         if(speedY>0) {
         	for (int i = 0; i < Math.abs(speedY); i++) {
         		y += 1;
         		puppy.updateAllHitbox(x, y, puppy.getWidth(), puppy.getHeight());
-        		for (Rectangle r : blocks.getBlock()) {
+        		for (Hitbox r : blocks
+        				) {
         			if (puppy.getHitboxFeet().isOverlapping(r)) {
         				return;
         			}
@@ -49,8 +47,6 @@ public class PhysicsObjects {
 
 	public void update(Puppy puppy) {
 		move(puppy);
-//        speedX *= FRICTION;
-//        speedY *= FRICTION;
 		accelerate(0, GRAVITY); // gravity accelerates the object downwards each tick
 	}
 

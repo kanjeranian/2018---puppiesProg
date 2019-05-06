@@ -2,15 +2,17 @@ package character;
 
 
 
+import java.util.ArrayList;
+
 import SharedObject.IRenderable;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import logic.PhysicsObjects;
 import logic.Point;
-import logic.Rectangle;
+import logic.Hitbox;
 import others.Block;
 
-public class Puppy extends PhysicsObjects implements IRenderable {
+public class Puppy extends PhysicsObjects implements IRenderable,Fightable {
 	
 	private double z;
 	private boolean is_visible, is_destroyed;
@@ -19,16 +21,16 @@ public class Puppy extends PhysicsObjects implements IRenderable {
 	private static final Image DOG_IMAGE_RIGHT = new Image("file:res/pom12.png");
 	private Image dogIMG = DOG_IMAGE_RIGHT; //เอาไว้เลือกว่าจะใช้ left หรือ right
 	
-	private Rectangle hitbox = new Rectangle(new Point(0, 0));
-	private Rectangle hitboxHead = new Rectangle(new Point(0, 0));
-	private Rectangle hitboxFeet = new Rectangle(new Point(0, 0));
-	private Rectangle hitboxLeft = new Rectangle(new Point(0, 0));
-	private Rectangle hitboxRight = new Rectangle(new Point(0, 0));
+	private Hitbox hitbox = new Hitbox();
+	private Hitbox hitboxHead = new Hitbox();
+	private Hitbox hitboxFeet = new Hitbox();
+	private Hitbox hitboxLeft = new Hitbox();
+	private Hitbox hitboxRight = new Hitbox();
 	
 	private double width;
 	private double height;
 	
-	private Block blocks = new Block();
+    private ArrayList<Hitbox> blocks = Block.getBlocks();    
 	
 	private boolean isJumping,isGoLeft,isCollide;
 	
@@ -44,23 +46,23 @@ public class Puppy extends PhysicsObjects implements IRenderable {
 		this.height = height;
 		
 		updateAllHitbox(x, y, width, height);
-		hitbox = new Rectangle(new Point(x, y), new Point(x+width, y+height));
-		hitboxHead = new Rectangle(new Point(x, y), new Point(x+width, y+height/5*4));
-		hitboxFeet = new Rectangle(new Point(x, y+height/5*4), new Point(x+width, y+height));
-		hitboxLeft = new Rectangle(new Point(x, y), new Point(x+10, y+height-20));
-		hitboxRight = new Rectangle(new Point(x+width-10, y), new Point(x+width, y+height-20));
+		hitbox = new Hitbox(new Point(x, y), new Point(x+width, y+height));
+		hitboxHead = new Hitbox(new Point(x, y), new Point(x+width, y+height/5*4));
+		hitboxFeet = new Hitbox(new Point(x, y+height/5*4), new Point(x+width, y+height));
+		hitboxLeft = new Hitbox(new Point(x, y), new Point(x+10, y+height-20));
+		hitboxRight = new Hitbox(new Point(x+width-10, y), new Point(x+width, y+height-20));
 	}
 	
-	public Rectangle getHitbox() {
+	public Hitbox getHitbox() {
 		return hitbox;
 	}
 	
-	public Rectangle getHitboxHead() {
+	public Hitbox getHitboxHead() {
 		return hitboxHead;
 	}
 
 
-	public Rectangle getHitboxFeet() {
+	public Hitbox getHitboxFeet() {
 		return hitboxFeet;
 	}
 
@@ -77,7 +79,7 @@ public class Puppy extends PhysicsObjects implements IRenderable {
 		if(goLeft) 	goLeft();
 		if(goRight) goRight();
 
-		for (Rectangle r: blocks.getBlock()) {
+		for (Hitbox r: blocks) {
 			if(hitbox.isOverlapping(r)) {
 				if(hitboxHead.isOverlapping(r)) onCollideTop();
 				if(hitboxFeet.isOverlapping(r)) onCollideDown();	
@@ -86,15 +88,23 @@ public class Puppy extends PhysicsObjects implements IRenderable {
 	}
 	
 	public void update(boolean goUp,boolean goLeft, boolean goRight) {
-		checkForUpdate(goUp,goLeft,goRight);
+		checkForUpdate(goUp,goLeft,goRight); 
 		super.update(this); //update physics object
 		updateAllHitbox(getX(), getY(), width, height);
 		hp.setPoint(getX()+3,getY()-36);
-//		if(goLeft) hp.setPoint(getX()+8,getY()-36);
-//		else {
-//			hp.setPoint(getX()+13,getY()-36);
-//		}
+//		System.out.println("was destroyed\n");
+		
 	}
+	
+	public boolean wasHauntedBy(Ghost ghost) {
+		if(hitbox.isOverlapping(ghost.getHitbox())){
+			System.out.println("was Haunted\n");
+			return true;
+		}
+		return false;
+	}
+	
+	
 		
 	public void jump() {
 		if (!isJumping) {
@@ -105,7 +115,7 @@ public class Puppy extends PhysicsObjects implements IRenderable {
 	
 	public void goLeft() {
 		dogIMG = DOG_IMAGE_LEFT;
-		for (Rectangle r:blocks.getBlock()) {
+		for (Hitbox r:blocks) {
 			if(hitboxLeft.isOverlapping(r)) return;
 		}
 		setX(getX()-2.5);
@@ -114,7 +124,7 @@ public class Puppy extends PhysicsObjects implements IRenderable {
 	
 	public void goRight() {
 		dogIMG = DOG_IMAGE_RIGHT;
-		for (Rectangle r:blocks.getBlock()) {
+		for (Hitbox r:blocks) {
 			if(hitboxRight.isOverlapping(r)) return;
 		}
 		setX(getX()+2.5);
@@ -179,6 +189,18 @@ public class Puppy extends PhysicsObjects implements IRenderable {
 	@Override
 	public boolean isVisible() {
 		return is_visible;
+	}
+
+	@Override
+	public void destroy(Fightable target) {
+		// ยิงอาวุธ 
+		
+	}
+
+	@Override
+	public void wasDestroyed() {
+		// TODO Auto-generated method stub
+		hp.decrease(5);
 	}
 	
 

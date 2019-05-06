@@ -3,7 +3,7 @@ package character;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import logic.Point;
-import logic.Rectangle;
+import logic.Hitbox;
 import java.util.Random;
 
 import SharedObject.IRenderable;
@@ -19,11 +19,7 @@ public class Ghost implements IRenderable {
 	private static final Image GHOST_IMAGE_Right = new Image("file:res/ghostR.png");
 	private Image ghostIMG = GHOST_IMAGE_LEFT;
 	
-	private Rectangle hitbox = new Rectangle(new Point(0, 0));
-	private Rectangle hitboxHead = new Rectangle(new Point(0, 0));
-	private Rectangle hitboxFeet = new Rectangle(new Point(0, 0));
-	private Rectangle hitboxLeft = new Rectangle(new Point(0, 0));
-	private Rectangle hitboxRight = new Rectangle(new Point(0, 0));
+	private Hitbox hitbox = new Hitbox();
 	
 	private double width=W;
 	private double height=H;
@@ -40,6 +36,10 @@ public class Ghost implements IRenderable {
 		hp = new Hp(x+28,y-39,z+0.5);
 	}
 	
+	public Hitbox getHitbox() {
+		return hitbox;
+	}
+
 	public void update(Puppy puppy) {
 		moveToPup(puppy);		
 		if(isLeft==true) {
@@ -47,6 +47,7 @@ public class Ghost implements IRenderable {
 			return;
 		}
 		hp.setPoint(x+57, y-39);
+		hitbox.setRectangle(x, y, width, height);
 	}
 
 	

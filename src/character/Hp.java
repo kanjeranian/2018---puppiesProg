@@ -3,14 +3,14 @@ package character;
 import SharedObject.IRenderable;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import logic.Rectangle;
+import logic.Hitbox;
 
 public class Hp implements IRenderable {
 	
 	private double z;
 	private double x,y;
 	private static final double W = 89, H=19;
-	private boolean is_visible, is_destroyed;
+	private boolean is_visible = true, is_destroyed=false;
 	
 	private static final Color GHOST_BLOOD = Color.rgb(209,40,84);
 	private static final Color PUPPY_BLOOD = Color.rgb(43,127,95);
@@ -68,5 +68,24 @@ public class Hp implements IRenderable {
 		this.x = x;
 		this.y = y;
 	}
+	
+	public void decrease(double x) {
+		hp-=x;
+//		hp=hp<0?0:x;
+	}
 
+	
+	public double getHp() {
+		return hp;
+	}
+
+
+	public void setHp(double hp) {
+		this.hp = hp;
+	}
+	
+	
+	
+
+	
 }
