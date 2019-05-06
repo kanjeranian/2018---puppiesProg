@@ -92,13 +92,11 @@ public class Puppy extends PhysicsObjects implements IRenderable,Fightable {
 		super.update(this); //update physics object
 		updateAllHitbox(getX(), getY(), width, height);
 		hp.setPoint(getX()+3,getY()-36);
-//		System.out.println("was destroyed\n");
 		
 	}
 	
 	public boolean wasHauntedBy(Ghost ghost) {
 		if(hitbox.isOverlapping(ghost.getHitbox())){
-			System.out.println("was Haunted\n");
 			return true;
 		}
 		return false;
@@ -200,7 +198,7 @@ public class Puppy extends PhysicsObjects implements IRenderable,Fightable {
 	@Override
 	public void wasDestroyed() {
 		// TODO Auto-generated method stub
-		hp.decrease(5);
+		hp.decrease(0.08);
 	}
 	
 
