@@ -19,6 +19,9 @@ public class Puppy extends PhysicsObjects implements IRenderable,Fightable {
 	
 	private static final Image DOG_IMAGE_LEFT = new Image("file:res/pom1.png");
 	private static final Image DOG_IMAGE_RIGHT = new Image("file:res/pom12.png");
+	private static final Image DOG_IMAGE_LEFT_DEAD = new Image("file:res/pomLeftDead.png");
+	private static final Image DOG_IMAGE_RIGHT_DEAD = new Image("file:res/pomRightDead.png");
+
 	private Image dogIMG = DOG_IMAGE_RIGHT; //เอาไว้เลือกว่าจะใช้ left หรือ right
 	
 	private Hitbox hitbox = new Hitbox();
@@ -32,7 +35,8 @@ public class Puppy extends PhysicsObjects implements IRenderable,Fightable {
 	
     private ArrayList<Hitbox> blocks = Block.getBlocks();    
 	
-	private boolean isJumping,isGoLeft,isCollide;
+    private boolean isJumping,isGoLeft,isCollide,deadLeft;
+	private boolean firstDead = true;
 	
 	private Hp hp;
 	
@@ -88,11 +92,18 @@ public class Puppy extends PhysicsObjects implements IRenderable,Fightable {
 	}
 	
 	public void update(boolean goUp,boolean goLeft, boolean goRight) {
-		checkForUpdate(goUp,goLeft,goRight); 
-		super.update(this); //update physics object
-		updateAllHitbox(getX(), getY(), width, height);
-		hp.setPoint(getX()+3,getY()-36);
-		
+		if(hp.getHp()>0) {
+			checkForUpdate(goUp,goLeft,goRight); 
+			super.update(this); //update physics object
+			updateAllHitbox(getX(), getY(), width, height);
+			hp.setPoint(getX()+3,getY()-36);	
+			return;
+		}
+		if(firstDead) { 
+			deadLeft=goLeft;
+			firstDead = false;
+		}
+		dogIMG = deadLeft? DOG_IMAGE_LEFT_DEAD:DOG_IMAGE_RIGHT_DEAD;
 	}
 	
 	public boolean wasHauntedBy(Ghost ghost) {

@@ -62,13 +62,11 @@ public class Block implements IRenderable{
 
 	@Override
 	public boolean isDestroyed() {
-		// TODO Auto-generated method stub
 		return is_destroyed;
 	}
 
 	@Override
 	public boolean isVisible() {
-		// TODO Auto-generated method stub
 		return is_visible;
 	}
 	
