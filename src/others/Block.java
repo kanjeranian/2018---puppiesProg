@@ -54,8 +54,9 @@ public class Block implements IRenderable{
 	@Override
 	public void draw(GraphicsContext gc) {
 		gc.setFill(Color.rgb(43,51,51));
-		for(Hitbox block:instance.blocks) {
-			gc.fillRect(block.getX(), block.getY(), WIDTH, HEIGHT);
+		for(int i=0; i<instance.blocks.size()-1;i++) {
+			gc.fillRect(instance.blocks.get(i).getX(), instance.blocks.get(i).getY(),
+					WIDTH, HEIGHT);
 		}
 	}
 
