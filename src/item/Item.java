@@ -1,6 +1,8 @@
 package item;
 
 import SharedObject.IRenderable;
+import character.AllGhost;
+import character.Ghost;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import logic.Hitbox;
@@ -49,9 +51,21 @@ public abstract class Item implements IRenderable {
 		return is_visible;
 	}
 	
-	public void update() {
-		x=goLeft?x-3:x+3;
+	public void attackTo(Ghost ghost) {
+		if(hitbox.isOverlapping(ghost.getHitbox())) {
+			ghost.getHp().decrease(power);
+		}
+		
 	}
+	
+	public void update() { //ถ้าขยันก็มาเปลี่ยนให้ยิงเพิ่อนได้
+		x=goLeft?x-3:x+3;
+		for(Ghost ghost:AllGhost.getGhostsList()) {
+				attackTo(ghost);
+			}
+		}
+		
+	
 	
 	
 	

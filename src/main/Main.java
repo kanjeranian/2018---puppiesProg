@@ -1,6 +1,8 @@
 package main;
 
 import java.util.ArrayList;
+
+import gameManager.GameManager;
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -23,33 +25,54 @@ import others.GameScreen;
 
 public class Main extends Application {
     private GameScreen gameScreen;
+    private GameManager gameManager;
 
     @Override
     public void start(Stage stage) throws Exception {
 
     	gameScreen = new GameScreen();
-        stage.setScene(gameScreen.getGameScene());
-        stage.show();
+    	gameManager = new GameManager(gameScreen);
 
-        
-        Timeline tl = new Timeline(
-        	new KeyFrame(Duration.seconds(1./60), e ->  {
-        		// game loop
-        		gameScreen.update();
-        		gameScreen.draw();
-        	})
-        );
-        tl.setCycleCount(Timeline.INDEFINITE); // loop infinite time
-        tl.play();
-        
-        Thread t = new Thread(() ->  {
-        	while (true) {
-        		Platform.runLater(() -> {
-        			// do something
-        		});        		
-        	}
-        });
+    	stage.setScene(gameScreen.getGameScene());
+        stage.show();
+                
     }
 
     public static void main(String[] args) { launch(args); }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//        Thread t = new Thread(() ->  {
+//        	while (true) {
+//        		Platform.runLater(() -> {
+//        			// do something
+//        		});        		
+//        	}
+//        });

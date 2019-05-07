@@ -2,6 +2,7 @@ package others;
 
 import java.util.ArrayList;
 
+import character.AllGhost;
 import character.Ghost;
 import character.Puppy;
 import javafx.event.EventHandler;
@@ -23,7 +24,8 @@ import logic.Hitbox;
 public class GameScreen extends StackPane {
 	
 	private static final double W = 1200, H = 900;
-    private static final String DOG_IMAGE = "file:res/pom1.png";
+    private static final String DOG_IMAGE1 = "file:res/pom1.png";
+    private static final String DOG_IMAGE2 = "file:res/pom2.png";
     private static final String BG_IMAGE = "file:res/bg.png";
     private static final String GHOST_IMAGE = "file:res/ghostL.png";
 
@@ -35,21 +37,24 @@ public class GameScreen extends StackPane {
     boolean running, goUp, goDown, goRight, goLeft, attacking;
     private ArrayList<Hitbox> blocks = Block.getBlocks();    
     
-    // -- my code
     private GraphicsContext gc;
 
     private Image bgImage = new Image(BG_IMAGE);
-    private Image dogImage = new Image(DOG_IMAGE);
+    private Image dogImage = new Image(DOG_IMAGE1);
+    private Image dogImage2 = new Image(DOG_IMAGE2);
     private Image ghostImage = new Image(GHOST_IMAGE);
     
     private Block allBlocks = Block.getBlockInstance();
     private Puppy player1 = new Puppy(W/2, H/2, dogImage.getWidth(), dogImage.getHeight(),1);
+//    private Puppy player2 = new Puppy(W/4,H/4, dogImage)
     private Ghost ghost1 = new Ghost(3);
+//    private ArrayList<Ghost>  ghostsList = AllGhost.getGhostsList();
     
-    
-    
+   
     //con สร้าง canvas+ปากกา ยัดใส่ rootPane , ดูว่ากดหรือปล่อยปุ่ม
     public GameScreen() {
+    	AllGhost.addGhost(ghost1);
+    	
     	Canvas cv = new Canvas(W, H);
     	gc = cv.getGraphicsContext2D();
     	Pane root = new Pane(cv);

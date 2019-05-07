@@ -28,6 +28,14 @@ public class Ghost implements IRenderable {
 	private Hp hp;
 	private boolean isLeft;
 
+	public double getHpValue() {
+		return hp.getHp();
+	}
+	
+	public Hp getHp() {
+		return hp;
+	}
+	
 	
 	public Ghost(int z) {
 		this.z = z;

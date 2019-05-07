@@ -6,23 +6,20 @@ import javafx.util.Duration;
 import others.GameScreen;
 
 public class LogicLoop {
-	private static LogicLoop instance = new LogicLoop();
 	
 	private Timeline timeline;
+	private GameScreen gameScreen;
 	
-	private  LogicLoop() {
+	public  LogicLoop(GameScreen gameScreen) {
+		this.gameScreen = gameScreen;
 		timeline = new Timeline(
 				new KeyFrame(Duration.seconds(1./60), e -> {
-					//ไปคิดเอาเองว่าแต่ละ loop ทำไรดี ;__;
-					
+					gameScreen.update();
+					gameScreen.draw();					
 				}));
 		timeline.setCycleCount(Timeline.INDEFINITE);
 		timeline.play();
 	}
-	
-
-	
-	
 	
 	
 }
