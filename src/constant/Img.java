@@ -16,7 +16,9 @@ public class Img {
 	public static final Image pup1R  = new Image(ClassLoader.getSystemResource("pom1Right.png").toString(),WIDTH_PUP,HEIGHT_PUP,true,false);
 	public static final Image pup2L  = new Image(ClassLoader.getSystemResource("pom2Left.png").toString(),WIDTH_PUP,HEIGHT_PUP,true,false);
 	public static final Image pup2R  = new Image(ClassLoader.getSystemResource("pom2Right.png").toString(),WIDTH_PUP,HEIGHT_PUP,true,false);
-	
+	public static final Image pupDeadL  = new Image(ClassLoader.getSystemResource("pomLeftDead.png").toString(),WIDTH_PUP,HEIGHT_PUP,true,false);
+	public static final Image pupDeadR  = new Image(ClassLoader.getSystemResource("pomRightDead.png").toString(),WIDTH_PUP,HEIGHT_PUP,true,false);
+
 	//Ghosts
 	public static final double WIDTH_GHOST = 178, HEIGHT_GHOST= 216;
 	public static final Image ghost = new Image(ClassLoader.getSystemResource("ghostR.png").toString(),WIDTH_GHOST,HEIGHT_GHOST,true,false);
