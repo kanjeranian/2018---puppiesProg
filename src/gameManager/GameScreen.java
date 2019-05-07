@@ -31,7 +31,8 @@ public class GameScreen extends StackPane {
     private Scene scene;
     private GraphicsContext gc;
     
-    boolean running, goUp, goDown, goRight, goLeft, attacking;
+    boolean goUp1, goDown1, goRight1, goLeft1, attacking1;
+    boolean goUp2, goDown2, goRight2, goLeft2, attacking2;
    
     private ArrayList<Hitbox> blocks = Block.getBlocks();    
     private Block allBlocks = Block.getBlockInstance();
@@ -67,12 +68,17 @@ public class GameScreen extends StackPane {
             @Override
             public void handle(KeyEvent event) {
                 switch (event.getCode()) {
-                    case UP:  	goUp	= true;	break;
-                    case DOWN:  goDown 	= true; break;
-                    case LEFT:  goLeft  = true; break;
-                    case RIGHT: goRight = true; break;
-                    case SHIFT: running = true; break;
-                    case ENTER: attacking = true; break;
+                    case UP:  	goUp1		= true;	break;
+                    case DOWN:  goDown1 	= true; break;
+                    case LEFT:  goLeft1  	= true; break;
+                    case RIGHT: goRight1   	= true; break;
+                    case ENTER: attacking1 	= true; break;
+                    
+                    case W:  	goUp2		= true;	break;
+                    case S:  	goDown2 	= true; break;
+                    case A:  	goLeft2  	= true; break;
+                    case D: 	goRight2   	= true; break;
+                    case SPACE: attacking2 	= true; break;
                 }
             }
         });
@@ -81,12 +87,17 @@ public class GameScreen extends StackPane {
             @Override
             public void handle(KeyEvent event) {
                 switch (event.getCode()) {
-                    case UP:    goUp = false; break;
-                    case DOWN:  goDown = false; break;
-                    case LEFT:  goLeft  = false; break;
-                    case RIGHT: goRight  = false; break;
-                    case SHIFT: running = false; break;
-                    case ENTER: attacking = false; break;
+                    case UP:    goUp1 		= false; break;
+                    case DOWN:  goDown1 	= false; break;
+                    case LEFT:  goLeft1  	= false; break;
+                    case RIGHT: goRight1  	= false; break;
+                    case ENTER: attacking1 	= false; break;
+                    
+                    case W:  	goUp2		= false; break;
+                    case S:  	goDown2 	= false; break;
+                    case A:  	goLeft2  	= false; break;
+                    case D: 	goRight2   	= false; break;
+                    case SPACE: attacking2 	= false; break;
                 }
             }
         });
@@ -95,7 +106,9 @@ public class GameScreen extends StackPane {
     
     
 	public void update() {
-		player1.update(goUp,goLeft,goRight,attacking);
+		player1.update(goUp1,goLeft1,goRight1,attacking1);
+		player2.update(goUp2,goLeft2,goRight2,attacking2);
+		
 		ghost1.update(player1);
 		if(player1.wasHauntedBy(ghost1)) {
 			player1.wasDestroyed();
@@ -106,6 +119,7 @@ public class GameScreen extends StackPane {
 		gc.drawImage(Img.bg, 0, 0);	
 		allBlocks.draw(gc);
 		player1.draw(gc);
+		player2.draw(gc);
 		ghost1.draw(gc);
 		drawHitbox();
 
