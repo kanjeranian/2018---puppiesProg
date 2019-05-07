@@ -34,8 +34,8 @@ public class GameScreen extends StackPane {
     private ArrayList<Hitbox> blocks = Block.getBlocks();    
     private Block allBlocks = Block.getBlockInstance();
     
-    private Puppy player1 = new Puppy(W/2, H/2, Img.puppy.getWidth(), Img.puppy.getHeight(),1);
-    private Puppy player2 = new Puppy(W/2, H/2, Img.puppy2.getWidth(), Img.puppy2.getHeight(),2);
+    private Puppy player1 = new Puppy(W/2, H/2,1);
+    private Puppy player2 = new Puppy(W/2, H/2,2);
 
     private Ghost ghost1 = new Ghost(3);    
    
