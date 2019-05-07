@@ -3,18 +3,20 @@ package character;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import logic.Point;
+import others.Obj;
 import logic.Hitbox;
 import java.util.Random;
 
 import SharedObject.IRenderable;
+import item.BlueBall;
+import item.Item;
 
-public class Ghost implements IRenderable {
+public class Ghost extends Character implements IRenderable {
 	
-	private double z;
-	private double x,y;
 	private boolean is_visible, is_destroyed;
 	private static final double W = 178, H=216;
 	
+	public static final double DAMAGE = 5;
 	private static final Image GHOST_IMAGE_LEFT = new Image("file:res/ghostL.png");
 	private static final Image GHOST_IMAGE_Right = new Image("file:res/ghostR.png");
 	private Image ghostIMG = GHOST_IMAGE_LEFT;
@@ -24,23 +26,13 @@ public class Ghost implements IRenderable {
 	private double width=W;
 	private double height=H;
 	private double speed;
-	
-	private Hp hp;
-	private boolean isLeft;
 
-	public double getHpValue() {
-		return hp.getHp();
-	}
-	
-	public Hp getHp() {
-		return hp;
-	}
+	private boolean isLeft;
 	
 	
 	public Ghost(int z) {
-		this.z = z;
+		super(0, 0, z);
 		speed = 0.5;
-		
 		hp = new Hp(x+28,y-39,z+0.5);
 	}
 	
@@ -94,6 +86,21 @@ public class Ghost implements IRenderable {
 	public boolean isVisible() {
 		// TODO Auto-generated method stub
 		return is_visible;
+	}
+
+	@Override
+	public void takeDamageBy(Obj obj) {
+		if(obj instanceof Item && ((Item)obj).getHitbox().isOverlapping(hitbox)) { 
+			hp.decrease(((Item)obj).getDamage());
+		}
+	}
+
+	public double getHpValue() {
+		return hp.getHp();
+	}
+
+	public Object getHp() {
+		return hp;
 	}
 
 }

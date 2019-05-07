@@ -69,9 +69,8 @@ public class Hp implements IRenderable {
 		this.y = y;
 	}
 	
-	public void decrease(double x) {
-		hp-=x;
-//		hp=hp<0?0:x;
+	public void decrease(double damage) {
+		setHp(hp-damage);
 	}
 
 	
@@ -81,7 +80,8 @@ public class Hp implements IRenderable {
 
 
 	public void setHp(double hp) {
-		this.hp = hp;
+		this.hp = hp<0?0:hp;
+		this.hp = hp>100?100:hp;
 	}
 	
 	

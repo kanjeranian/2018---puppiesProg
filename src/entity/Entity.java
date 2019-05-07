@@ -11,7 +11,7 @@ public abstract class Entity {
 		spawned = true;
 	}
 
-	public int getZ() {
+	public double getZ() {
 		return z;
 	}
 

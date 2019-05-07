@@ -2,7 +2,6 @@ package gameManager;
 
 import java.util.ArrayList;
 
-import character.AllGhost;
 import character.Ghost;
 import character.Puppy;
 import character.Puppy1;
@@ -48,15 +47,8 @@ public class GameScreen extends StackPane {
     
     
     //con สร้าง canvas+ปากกา ยัดใส่ rootPane , ดูว่ากดหรือปล่อยปุ่ม
-   
-    
-    
-    
-    
-    
-    
     public GameScreen() {
-    	AllGhost.addGhost(ghost1);
+//    	AllGhost.addGhost(ghost1);
     	
     	Canvas cv = new Canvas(W, H);
     	gc = cv.getGraphicsContext2D();
@@ -68,12 +60,13 @@ public class GameScreen extends StackPane {
             @Override
             public void handle(KeyEvent event) {
                 switch (event.getCode()) {
+                
                     case UP:  	goUp1		= true;	break;
                     case DOWN:  goDown1 	= true; break;
                     case LEFT:  goLeft1  	= true; break;
                     case RIGHT: goRight1   	= true; break;
                     case ENTER: attacking1 	= true; break;
-                    
+          
                     case W:  	goUp2		= true;	break;
                     case S:  	goDown2 	= true; break;
                     case A:  	goLeft2  	= true; break;
@@ -87,6 +80,7 @@ public class GameScreen extends StackPane {
             @Override
             public void handle(KeyEvent event) {
                 switch (event.getCode()) {
+                
                     case UP:    goUp1 		= false; break;
                     case DOWN:  goDown1 	= false; break;
                     case LEFT:  goLeft1  	= false; break;
@@ -110,9 +104,11 @@ public class GameScreen extends StackPane {
 		player2.update(goUp2,goLeft2,goRight2,attacking2);
 		
 		ghost1.update(player1);
-		if(player1.wasHauntedBy(ghost1)) {
-			player1.wasDestroyed();
-		}
+		player1.takeDamageBy(ghost1);
+		player2.takeDamageBy(ghost1);
+//		if(player1.wasHauntedBy(ghost1)) {
+//			player1.takeDamageBy(ghost1);
+//		}
 	}
 	    
 	public void draw() {
