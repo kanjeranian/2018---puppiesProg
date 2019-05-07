@@ -3,7 +3,7 @@
   realizations="true" associations="false" dependencies="false" nesting-relationships="true" router="FAN">  
   <class id="1" language="java" name="logic.PhysicsObjects" project="2110215_Project_2018_puppiesProg" 
     file="/2110215_Project_2018_puppiesProg/src/logic/PhysicsObjects.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="253" y="580"/>    
+    <position height="-1" width="-1" x="492" y="96"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -12,7 +12,7 @@
   </class>  
   <class id="2" language="java" name="logic.Hitbox" project="2110215_Project_2018_puppiesProg" 
     file="/2110215_Project_2018_puppiesProg/src/logic/Hitbox.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="-59" y="382"/>    
+    <position height="-1" width="-1" x="23" y="484"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -66,7 +66,7 @@
   </class>  
   <class id="8" language="java" name="character.Character" project="2110215_Project_2018_puppiesProg" 
     file="/2110215_Project_2018_puppiesProg/src/character/Character.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="685" y="215"/>    
+    <position height="-1" width="-1" x="811" y="293"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      

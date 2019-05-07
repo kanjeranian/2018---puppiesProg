@@ -6,7 +6,6 @@ import java.lang.Math;
 import java.util.ArrayList;
 
 public class PhysicsObjects {
-//    public static final double FRICTION = 0.99;
 	public static final double GRAVITY = 3;
     private ArrayList<Hitbox> blocks = Block.getBlocks();   
 	private double x;
