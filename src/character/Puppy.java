@@ -5,6 +5,7 @@ package character;
 import java.util.ArrayList;
 
 import SharedObject.IRenderable;
+import constant.Img;
 import item.BlueBall;
 import item.Item;
 import javafx.scene.canvas.GraphicsContext;
@@ -16,14 +17,18 @@ import others.Block;
 
 public class Puppy extends PhysicsObjects implements IRenderable,Fightable {
 	
+	//copy มาจาก phyZone
+	
+	
+	
+	
+	
 	private double z;
 	private boolean is_visible, is_destroyed;
 	
 	private static final Image DOG_IMAGE_LEFT = new Image("file:res/pom1.png");
 	private static final Image DOG_IMAGE_RIGHT = new Image("file:res/pom12.png");
-	private static final Image DOG_IMAGE_LEFT_DEAD = new Image("file:res/pomLeftDead.png");
-	private static final Image DOG_IMAGE_RIGHT_DEAD = new Image("file:res/pomRightDead.png");
-
+	
 	private Image dogIMG = DOG_IMAGE_RIGHT; //เอาไว้เลือกว่าจะใช้ left หรือ right
 	
 	private Hitbox hitbox = new Hitbox();
@@ -115,7 +120,7 @@ public class Puppy extends PhysicsObjects implements IRenderable,Fightable {
 			deadLeft=goLeft;
 			firstDead = false;
 		}
-		dogIMG = deadLeft? DOG_IMAGE_LEFT_DEAD:DOG_IMAGE_RIGHT_DEAD;
+		dogIMG = deadLeft? Img.pupDeadL:Img.pupDeadR;
 	}
 	
 	public void attack() {
@@ -234,7 +239,8 @@ public class Puppy extends PhysicsObjects implements IRenderable,Fightable {
 	@Override
 	public void wasDestroyed() {
 		// TODO Auto-generated method stub
-		hp.decrease(0.08);
+//		hp.decrease(0.08);
+		hp.decrease(5);
 	}
 	
 

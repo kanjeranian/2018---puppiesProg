@@ -1,4 +1,4 @@
-package others;
+package gameManager;
 
 import java.util.ArrayList;
 
@@ -20,6 +20,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import logic.Point;
+import others.Block;
 import logic.Hitbox;
 
 public class GameScreen extends StackPane {

@@ -1,9 +1,9 @@
 package logic;
 
+import gameManager.GameScreen;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
-import others.GameScreen;
 
 public class LogicLoop {
 	

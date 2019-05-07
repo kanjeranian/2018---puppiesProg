@@ -46,8 +46,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="others.GameScreen" project="2110215_Project_2018_puppiesProg" 
-    file="/2110215_Project_2018_puppiesProg/src/others/GameScreen.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="6" language="java" name="gameManager.GameScreen" project="2110215_Project_2018_puppiesProg" 
+    file="/2110215_Project_2018_puppiesProg/src/gameManager/GameScreen.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="280" y="-233"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      

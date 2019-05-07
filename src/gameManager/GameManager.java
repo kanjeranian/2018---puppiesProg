@@ -1,7 +1,6 @@
 package gameManager;
 
 import logic.LogicLoop;
-import others.GameScreen;
 
 public class GameManager {
 	

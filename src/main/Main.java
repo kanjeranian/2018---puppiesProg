@@ -3,6 +3,7 @@ package main;
 import java.util.ArrayList;
 
 import gameManager.GameManager;
+import gameManager.GameScreen;
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -21,7 +22,6 @@ import javafx.util.Duration;
 import logic.Point;
 import logic.Hitbox;
 import others.Block;
-import others.GameScreen;
 
 public class Main extends Application {
     private GameScreen gameScreen;
