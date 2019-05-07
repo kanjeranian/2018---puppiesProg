@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import character.AllGhost;
 import character.Ghost;
 import character.Puppy;
+import character.Puppy1;
+import character.Puppy2;
 import constant.Img;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -34,8 +36,8 @@ public class GameScreen extends StackPane {
     private ArrayList<Hitbox> blocks = Block.getBlocks();    
     private Block allBlocks = Block.getBlockInstance();
     
-    private Puppy player1 = new Puppy(W/2, H/2,1);
-    private Puppy player2 = new Puppy(W/2, H/2,2);
+    private Puppy1 player1 = new Puppy1(W/2, H/2,1);
+    private Puppy2 player2 = new Puppy2(W/2, H/2,2);
 
     private Ghost ghost1 = new Ghost(3);    
    
