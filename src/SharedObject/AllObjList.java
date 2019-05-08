@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import character.Ghost;
 import character.Puppy;
+import item.Gift;
 import item.Item;
 
 public class AllObjList {
@@ -12,7 +13,7 @@ public class AllObjList {
 	protected static ArrayList<Ghost> ghostsList = new ArrayList<Ghost>();
 	protected static ArrayList<Puppy> puppiesList = new ArrayList<Puppy>();
 	protected static ArrayList<Item> itemsList = new ArrayList<Item>();
-	
+	protected static ArrayList<Gift> giftsList = new ArrayList<Gift>();
 	//constructor
 	public AllObjList() {} 
 
@@ -24,6 +25,7 @@ public class AllObjList {
 		updateItemsList();
 	}
 	
+	//get
 	public static ArrayList<Ghost> getGhostsList() {
 		return ghostsList;
 	}
@@ -36,6 +38,12 @@ public class AllObjList {
 		return itemsList;
 	}
 	
+	public static ArrayList<Gift> getGiftsList() {
+		return giftsList;
+	}
+	
+	
+	//addTo
 	public static void addToGhostsList(Ghost ghost) {
 		ghostsList.add(ghost);
 	}
@@ -48,6 +56,11 @@ public class AllObjList {
 		getItemsList().add(item);
 	}
 	
+	public static void addToGiftList(Gift gift) {
+		getGiftsList().add(gift);
+	}
+	
+	//update
 	public static void updateGhostsLis() {
 		for(Ghost ghost: getGhostsList()) {
 			if(ghost.isDestroyed()) getGhostsList().remove(ghost);
@@ -65,6 +78,13 @@ public class AllObjList {
 			if(item.isDestroyed()) getItemsList().remove(item);
 		}
 	}
+	
+	public static void updateGiftList() {
+		for(Item item: getItemsList()) {
+			if(item.isDestroyed()) getItemsList().remove(item);
+		}
+	}
+	
 	
 	
 	

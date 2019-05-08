@@ -34,4 +34,6 @@ public abstract class Obj implements Renderable{
 		return Math.sqrt((x-other.x)*(x-other.x)+(y-other.y)*(y-other.y));
 	}
 	
+	
+	
 }

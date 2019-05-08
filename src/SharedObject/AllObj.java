@@ -8,6 +8,7 @@ import character.Puppy;
 import character.Puppy1;
 import character.Puppy2;
 import constant.Img;
+import item.Gift;
 import item.Item;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -36,11 +37,20 @@ public class AllObj extends AllObjList implements Renderable{
 	public static void update() {
 		playerUpdate();
 		ghostUpdate();
+		giftUpdate();
 
 		for (Item item : AllObj.getItemsList()) {
 			item.update();
 		}
 	}
+	//Update : อะไรไม่จำเป็นก็ลบ
+	private static void giftUpdate() {
+		for(Gift gift:new CopyOnWriteArrayList<Gift>(getGiftsList())) {
+			gift.update(player1);
+			gift.update(player2);
+		}
+	}
+	
 	private static void playerUpdate() {
 		player1.update(goUp1,goLeft1,goRight1,attacking1);
 		player2.update(goUp2,goLeft2,goRight2,attacking2);
@@ -78,13 +88,20 @@ public class AllObj extends AllObjList implements Renderable{
 		allBlocks.draw(gc);
 		player1.draw(gc);
 		player2.draw(gc);
+		//drawGhost
 		for(Ghost ghost: getGhostsList()) 
 		{
 			ghost.draw(gc);			
 		}
+		//drawItem
 		for (Item i : AllObj.getItemsList()) {
 			i.draw(gc);
 		}
+		//drawGift
+		for(Gift gift: AllObj.getGiftsList()) {
+			gift.draw(gc);
+		}
+		//drawHitbox
 		drawHitbox(gc);
 		
 	}
@@ -97,10 +114,16 @@ public class AllObj extends AllObjList implements Renderable{
 		}
 		drawRectHitBox(gc,player1.getHitbox());
 		drawRectHitBox(gc,player2.getHitbox());
+		//hitboxGhost
 		for(Ghost ghost: getGhostsList()) 
 		{
 			drawRectHitBox(gc,ghost.getHitbox());			
 		}
+		//hitboxGift
+		for(Gift gift: AllObj.getGiftsList()) {
+			drawRectHitBox(gc, gift.getHitbox());
+		}
+		
 	}
 	private void drawRectHitBox(GraphicsContext gc,Hitbox r) {
 		Point tl = r.getTopLeft(), br = r.getBottomRight();

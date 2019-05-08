@@ -211,6 +211,17 @@ public class Puppy extends Character implements Renderable{
 	public boolean isDead() {
 		return hp.getHp()<0.2;
 	}
+	
+	public void setItem(int a) {
+		switch (a) {
+		case 0: item = new BlueBall		(x/2, y/2, z+0.1, true, false, isGoLeft); break;
+		case 1: item = new OrangeBall	(x/2, y/2, z+0.1, true, false, isGoLeft); break;
+		case 2: item = new GreenBone	(x/2, y/2, z+0.1, true, false, isGoLeft); break;
+		case 3: item = new BrownBone	(x/2, y/2, z+0.1, true, false, isGoLeft); break;
+		default:
+			break;
+		}
+	}
 
 
 }

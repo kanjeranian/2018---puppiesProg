@@ -1,18 +1,57 @@
 package item;
 
+import SharedObject.AllObj;
+import character.Puppy;
 import constant.Img;
+import logic.Hitbox;
+import logic.Point;
+import others.Block;
 
-public class Gift extends Item{
+public class Gift extends Item implements Randomable{
 	private static final double DAMAGE = 0;
 
-	public Gift(double x, double y, double z, 
-			boolean is_visible, boolean is_destroy,
-			boolean goLeft) {
-		super(x, y, z, Img.gift, DAMAGE, is_visible, is_destroy, goLeft);
+	public Gift() {
+		super(0, 0, 1, Img.gift, DAMAGE, true, false, true);
+		update();
 	}
 	
 	@Override
 	public void update(){
-		
+		Point point = randomPosition();
+		x = point.getX();
+		y = point.getY();
+		updateHitbox();
 	}
+	
+	public void update(Puppy puppy) {
+		if(getHitbox().isOverlapping(puppy.getHitbox())) {
+			puppy.setItem((int)Math.random()*4);
+			AllObj.getGiftsList().remove(this);
+		}
+	}
+
+	@Override
+	public Point randomPosition() {
+		boolean ok=false;
+		double randomX = Math.random()*1200, randomY = Math.random()*900;
+		while(!ok) {
+			randomX = Math.random()*1200;
+			randomY = Math.random()*900;
+			if(checkPoint(randomX, randomY)) {
+				ok = true;
+			}
+		}
+		return new Point(randomX, randomY);
+	}
+
+	@Override
+	public boolean checkPoint(double x,double y) {
+		Hitbox box = new Hitbox(x, y, Img.WIDTH_GIFT, Img.HEIGHT_GIFT);
+		for(Hitbox block: Block.getBlocks()) {
+			if(block.isOverlapping(box)) return false;
+		}
+		return true;
+	}
+	
+	
 }
