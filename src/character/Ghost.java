@@ -7,11 +7,11 @@ import others.Obj;
 import logic.Hitbox;
 import java.util.Random;
 
-import SharedObject.IRenderable;
+import SharedObject.Renderable;
 import item.BlueBall;
 import item.Item;
 
-public class Ghost extends Character implements IRenderable {
+public class Ghost extends Character implements Renderable {
 	
 	private boolean is_visible, is_destroyed;
 	private static final double W = 178, H=216;
@@ -74,7 +74,7 @@ public class Ghost extends Character implements IRenderable {
 	@Override
 	public void draw(GraphicsContext gc) {
 		gc.drawImage(ghostIMG, x, y);		
-		hp.draw(gc,(IRenderable)this);
+		hp.draw(gc,(Renderable)this);
 	}
 
 	@Override

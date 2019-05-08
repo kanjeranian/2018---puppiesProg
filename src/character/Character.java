@@ -1,11 +1,10 @@
 package character;
 
-import SharedObject.IRenderable;
-import entity.CollidableEntity;
+import SharedObject.Renderable;
 import javafx.scene.canvas.GraphicsContext;
 import others.Obj;
 
-public abstract class Character extends Obj implements IRenderable {
+public abstract class Character extends Obj implements Renderable {
 
 	protected Hp hp;
 

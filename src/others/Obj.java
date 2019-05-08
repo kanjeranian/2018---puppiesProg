@@ -1,10 +1,10 @@
 package others;
 
-import SharedObject.IRenderable;
+import SharedObject.Renderable;
 import character.Character;
 import character.Hp;
 
-public abstract class Obj implements IRenderable{
+public abstract class Obj implements Renderable{
 
 	protected double x, y, z;
 	protected boolean is_visible = true, is_destroyed = true;

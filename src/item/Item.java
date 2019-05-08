@@ -1,13 +1,13 @@
 package item;
 
-import SharedObject.IRenderable;
+import SharedObject.Renderable;
 import character.Ghost;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import logic.Hitbox;
 import others.Obj;
 
-public abstract class Item extends Obj implements IRenderable {
+public abstract class Item extends Obj implements Renderable {
 	private Hitbox hitbox;
 	private Image itemIMG;
 	private double damage; //พลังในการทำลาย

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import gameManager.GameManager;
 import gameManager.GameScreen;
+import gameManager.KeyPress;
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;

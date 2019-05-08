@@ -1,11 +1,11 @@
 package character;
 
-import SharedObject.IRenderable;
+import SharedObject.Renderable;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import logic.Hitbox;
 
-public class Hp implements IRenderable {
+public class Hp implements Renderable {
 	
 	private double z;
 	private double x,y;
@@ -42,8 +42,8 @@ public class Hp implements IRenderable {
 
 	}
 	
-	public void draw(GraphicsContext gc,IRenderable iRenderable) {
-		blood = iRenderable instanceof Ghost?GHOST_BLOOD : PUPPY_BLOOD;
+	public void draw(GraphicsContext gc,Renderable renderable) {
+		blood = renderable instanceof Ghost?GHOST_BLOOD : PUPPY_BLOOD;
 		draw(gc);
 		
 	}

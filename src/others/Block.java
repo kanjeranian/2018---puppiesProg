@@ -2,13 +2,13 @@ package others;
 
 import java.util.ArrayList;
 
-import SharedObject.IRenderable;
+import SharedObject.Renderable;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import logic.Point;
 import logic.Hitbox;
 
-public class Block implements IRenderable{
+public class Block implements Renderable{
 	
 	private double z;
 	private boolean is_visible, is_destroyed;

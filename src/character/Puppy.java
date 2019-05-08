@@ -2,7 +2,7 @@ package character;
 
 import java.util.ArrayList;
 
-import SharedObject.IRenderable;
+import SharedObject.Renderable;
 import constant.Img;
 import item.BlueBall;
 import item.Item;
@@ -13,7 +13,7 @@ import logic.Hitbox;
 import others.Block;
 import others.Obj;
 
-public class Puppy extends Character implements IRenderable{
+public class Puppy extends Character implements Renderable{
 
 	protected static final double WIDTH = Img.puppy.getWidth();
 	protected static final double HEIGHT = Img.puppy.getHeight();
@@ -128,7 +128,7 @@ public class Puppy extends Character implements IRenderable{
 	@Override
 	public void draw(GraphicsContext gc) { // same as render
 		gc.drawImage(dogIMG, x, y);
-		hp.draw(gc, (IRenderable) this);
+		hp.draw(gc, (Renderable) this);
 		for (Item i : releaseItem) {
 			i.draw(gc);
 		}

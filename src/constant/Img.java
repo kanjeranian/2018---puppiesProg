@@ -49,26 +49,3 @@ public class Img {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//new Image(ClassLoader.getSystemResource("Images/Logo.png").toString(),50,50,true,false);
