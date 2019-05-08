@@ -6,15 +6,15 @@ import character.Ghost;
 import character.Puppy;
 import item.Item;
 
-public class SharedObject {
+public class AllObjList {
 
 	//field
-	private static ArrayList<Ghost> ghostsList = new ArrayList<Ghost>();
-	private static ArrayList<Puppy> puppiesList = new ArrayList<Puppy>();
-	private static ArrayList<Item> itemsList = new ArrayList<Item>();
+	protected static ArrayList<Ghost> ghostsList = new ArrayList<Ghost>();
+	protected static ArrayList<Puppy> puppiesList = new ArrayList<Puppy>();
+	protected static ArrayList<Item> itemsList = new ArrayList<Item>();
 	
 	//constructor
-	public SharedObject() {} 
+	public AllObjList() {} 
 
 	//method
 	public static void update() {
@@ -37,7 +37,7 @@ public class SharedObject {
 	}
 	
 	public static void addToGhostsList(Ghost ghost) {
-		getGhostsList().add(ghost);
+		ghostsList.add(ghost);
 	}
 	
 	public static void addToPuppiesList(Puppy puppy) {

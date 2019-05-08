@@ -53,20 +53,6 @@ public class KeyPress {
 	
 	public void setKeyStatus() {
 		AllObj.ALL.setKeyStatus(goUp1,goLeft1,goRight1,attacking1,goUp2,goLeft2,goRight2,attacking2);
-	}
-	
-	
-//	public void update() {
-//		player1.update(goUp1,goLeft1,goRight1,attacking1);
-//		player2.update(goUp2,goLeft2,goRight2,attacking2);
-//		AllObj.update();
-//		
-//		ghost1.update(player1);
-//		player1.takeDamageBy(ghost1);
-//		player2.takeDamageBy(ghost1);
-//
-//	}
-	
-	
+	}	
 	
 }

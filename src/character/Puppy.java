@@ -205,6 +205,10 @@ public class Puppy extends Character implements Renderable{
 		}
 		dogIMG = deadLeft ? Img.pupDeadL : Img.pupDeadR;
 	}
+	
+	public boolean isDead() {
+		return hp.getHp()<0.2;
+	}
 
 
 }

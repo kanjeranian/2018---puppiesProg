@@ -30,6 +30,9 @@ public class Block implements Renderable{
 	   	addBlock(515,605);
 	   	addBlock(278,710);
 	   	addBlock(800,743);
+	   	blocks.add(new Hitbox(new Point(0,-100), new Point(1200,0))); //top
+	   	blocks.add(new Hitbox(new Point(-100,-100), new Point(0,900))); //left
+	   	blocks.add(new Hitbox(new Point(1200,0), new Point(1300,900))); //right
 	   	blocks.add(new Hitbox(new Point(0,841), new Point(1200,900))); //อันนี้คือพื้น
     	
 	}
