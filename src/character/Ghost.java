@@ -92,6 +92,7 @@ public class Ghost extends Character implements Renderable {
 	public void takeDamageBy(Obj obj) {
 		if(obj instanceof Item && ((Item)obj).getHitbox().isOverlapping(hitbox)) { 
 			hp.decrease(((Item)obj).getDamage());
+			System.out.println("damage-->" + ((Item)obj).getDamage());
 		}
 	}
 

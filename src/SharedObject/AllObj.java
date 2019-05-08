@@ -7,6 +7,7 @@ import character.Puppy;
 import character.Puppy1;
 import character.Puppy2;
 import constant.Img;
+import item.Item;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import logic.Hitbox;
@@ -35,6 +36,10 @@ public class AllObj extends AllObjList implements Renderable{
 		player1.update(goUp1,goLeft1,goRight1,attacking1);
 		player2.update(goUp2,goLeft2,goRight2,attacking2);
 		for(Ghost ghost: getGhostsList()) {
+			for(Item item: AllObj.getItemsList()) {
+//				System.out.println("i damage"+AllObj.getItemsList().indexOf(item)+item.getDamage());	
+				ghost.takeDamageBy(item);
+			}
 			if(player1.isDead() && !player2.isDead()) {
 				ghost.update(player2);
 			}else if(player2.isDead() && !player1.isDead()) {
@@ -46,21 +51,14 @@ public class AllObj extends AllObjList implements Renderable{
 			}
 			player1.takeDamageBy(ghost);
 			player2.takeDamageBy(ghost);
+			
+			for (Item item : AllObj.getItemsList()) {
+				item.update();
+			}
 		}
-//		ghost1.update(player1);
-//		
-//	Ghost ghost = ghost1;
-//	if(player1.isDead() && !player2.isDead()) {
-//		ghost.update(player2);
-//	}else if(player2.isDead() && !player1.isDead()) {
-//		ghost.update(player1);
-//	}else if(ghost.distanceTo(player1)<=ghost.distanceTo(player2)) {
-//		ghost.update(player1);
-//	}else {
-//		ghost.update(player2);
-//	}
-//		player1.takeDamageBy(ghost1);
-//		player2.takeDamageBy(ghost1);
+	}
+	public void playerUpdate() {
+		
 	}
 	
 	@Override
@@ -79,6 +77,9 @@ public class AllObj extends AllObjList implements Renderable{
 		{
 			ghost.draw(gc);			
 		}
+		for (Item i : AllObj.getItemsList()) {
+			i.draw(gc);
+		}
 		drawHitbox(gc);
 		
 	}
@@ -91,7 +92,10 @@ public class AllObj extends AllObjList implements Renderable{
 		}
 		drawRectHitBox(gc,player1.getHitbox());
 		drawRectHitBox(gc,player2.getHitbox());
-		drawRectHitBox(gc,ghost1.getHitbox());
+		for(Ghost ghost: getGhostsList()) 
+		{
+			drawRectHitBox(gc,ghost.getHitbox());			
+		}
 	}
 	private void drawRectHitBox(GraphicsContext gc,Hitbox r) {
 		Point tl = r.getTopLeft(), br = r.getBottomRight();

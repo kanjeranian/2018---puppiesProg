@@ -2,10 +2,15 @@ package character;
 
 import java.util.ArrayList;
 
+import SharedObject.AllObj;
 import SharedObject.Renderable;
 import constant.Img;
 import item.BlueBall;
+import item.BrownBone;
+import item.GreenBone;
+import item.Heart;
 import item.Item;
+import item.OrangeBall;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import logic.Point;
@@ -37,7 +42,7 @@ public class Puppy extends Character implements Renderable{
 	protected boolean firstDead = true;
 
 	protected Item item = new BlueBall(x / 2, y / 2, z + 0.1, true, false, isGoLeft);
-	protected ArrayList<Item> releaseItem = new ArrayList<>();
+//	protected ArrayList<Item> releaseItem = new ArrayList<>();
 
 	public Puppy(double x, double y, double z,Image dogImageL, Image dogImageR, Image dogImage) {
 		super(x,y,z);
@@ -54,8 +59,12 @@ public class Puppy extends Character implements Renderable{
 			if (item == null)
 				return;
 			Item i = null;
-			if (item instanceof BlueBall) {i = new BlueBall(x + WIDTH / 2, y + HEIGHT / 2, z + 0.1, true, false, isGoLeft);}
-			releaseItem.add((Item) i);
+			if (item instanceof BlueBall) 	{i = new BlueBall(x + WIDTH / 2, y + HEIGHT / 2, z + 0.1, true, false, isGoLeft);}
+			if (item instanceof OrangeBall) {i = new OrangeBall(x + WIDTH / 2, y + HEIGHT / 2, z + 0.1, true, false, isGoLeft);}
+			if (item instanceof BrownBone) 	{i = new BrownBone(x + WIDTH / 2, y + HEIGHT / 2, z + 0.1, true, false, isGoLeft);}
+			if (item instanceof GreenBone) 	{i = new GreenBone(x + WIDTH / 2, y + HEIGHT / 2, z + 0.1, true, false, isGoLeft);}
+			AllObj.addToItemsList(i);
+//			System.out.println("i damage"+i.getDamage());			
 		}
 		attackPress = true;
 	}
@@ -65,7 +74,7 @@ public class Puppy extends Character implements Renderable{
 		if(obj instanceof Ghost && ((Ghost)obj).getHitbox().isOverlapping(hitbox)) { 
 			hp.decrease(((Ghost)obj).DAMAGE);
 		}
-//		if(obj instanceof Heart) { hp.decrease(((Heart)obj).DAMAGE);}
+		if(obj instanceof Heart) { hp.decrease(((Heart)obj).DAMAGE);}
 	}
 
 	public void jump() {
@@ -129,9 +138,6 @@ public class Puppy extends Character implements Renderable{
 	public void draw(GraphicsContext gc) { // same as render
 		gc.drawImage(dogIMG, x, y);
 		hp.draw(gc, (Renderable) this);
-		for (Item i : releaseItem) {
-			i.draw(gc);
-		}
 	}
 
 
@@ -192,10 +198,6 @@ public class Puppy extends Character implements Renderable{
 			accelerate(0, GRAVITY);
 			updateAllHitbox(x, y);
 			hp.setPoint(x + 3, y - 36);
-			
-			for (Item i : releaseItem) {
-				i.update();
-			}
 			return;
 		}
 		
