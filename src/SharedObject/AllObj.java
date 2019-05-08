@@ -1,6 +1,7 @@
 package SharedObject;
 
 import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import character.Ghost;
 import character.Puppy;
@@ -46,9 +47,9 @@ public class AllObj extends AllObjList implements Renderable{
 	}
 	
 	private static void ghostUpdate() {
-		for(Ghost ghost: getGhostsList()) {
+		for(Ghost ghost: new CopyOnWriteArrayList<Ghost>(getGhostsList())) {
 			if(ghost.getHpValue()<=0.1) AllObjList.getGhostsList().remove(ghost);
-			for(Item item: AllObj.getItemsList()) {
+			for(Item item: new CopyOnWriteArrayList<Item>(getItemsList())) {
 				ghost.takeDamageBy(item);
 			}
 			if(player1.isDead() && !player2.isDead()) {

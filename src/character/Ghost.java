@@ -18,7 +18,7 @@ public class Ghost extends Character implements Renderable {
 	private boolean is_visible, is_destroyed;
 	private static final double W = 178, H=216;
 	
-	public static final double DAMAGE = 5;
+	public static final double DAMAGE = 0.5;
 	private static final Image GHOST_IMAGE_LEFT = new Image("file:res/ghostL.png");
 	private static final Image GHOST_IMAGE_Right = new Image("file:res/ghostR.png");
 	private Image ghostIMG = GHOST_IMAGE_LEFT;
