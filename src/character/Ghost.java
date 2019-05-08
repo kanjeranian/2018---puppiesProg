@@ -7,6 +7,8 @@ import others.Obj;
 import logic.Hitbox;
 import java.util.Random;
 
+import SharedObject.AllObj;
+import SharedObject.AllObjList;
 import SharedObject.Renderable;
 import item.BlueBall;
 import item.Item;
@@ -91,8 +93,10 @@ public class Ghost extends Character implements Renderable {
 	@Override
 	public void takeDamageBy(Obj obj) {
 		if(obj instanceof Item && ((Item)obj).getHitbox().isOverlapping(hitbox)) { 
-			hp.decrease(((Item)obj).getDamage());
-			System.out.println("damage-->" + ((Item)obj).getDamage());
+			Item item = (Item) obj;
+			hp.decrease(item.getDamage());
+			AllObjList.getItemsList().remove(item);
+			
 		}
 	}
 

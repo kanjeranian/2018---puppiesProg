@@ -33,11 +33,22 @@ public class AllObj extends AllObjList implements Renderable{
 	private AllObj() {}
 	
 	public static void update() {
+		playerUpdate();
+		ghostUpdate();
+
+		for (Item item : AllObj.getItemsList()) {
+			item.update();
+		}
+	}
+	private static void playerUpdate() {
 		player1.update(goUp1,goLeft1,goRight1,attacking1);
 		player2.update(goUp2,goLeft2,goRight2,attacking2);
+	}
+	
+	private static void ghostUpdate() {
 		for(Ghost ghost: getGhostsList()) {
+			if(ghost.getHpValue()<=0.1) AllObjList.getGhostsList().remove(ghost);
 			for(Item item: AllObj.getItemsList()) {
-//				System.out.println("i damage"+AllObj.getItemsList().indexOf(item)+item.getDamage());	
 				ghost.takeDamageBy(item);
 			}
 			if(player1.isDead() && !player2.isDead()) {
@@ -51,14 +62,7 @@ public class AllObj extends AllObjList implements Renderable{
 			}
 			player1.takeDamageBy(ghost);
 			player2.takeDamageBy(ghost);
-			
-			for (Item item : AllObj.getItemsList()) {
-				item.update();
 			}
-		}
-	}
-	public void playerUpdate() {
-		
 	}
 	
 	@Override
