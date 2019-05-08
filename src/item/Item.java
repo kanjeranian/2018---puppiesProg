@@ -27,11 +27,6 @@ public abstract class Item extends Obj implements Renderable {
 	}
 
 	@Override
-	public double getZ() {
-		return z;
-	}
-
-	@Override
 	public void draw(GraphicsContext gc) {
 		gc.drawImage(itemIMG,x,y);
 	}

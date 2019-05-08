@@ -21,11 +21,6 @@ public abstract class Obj implements Renderable{
 	}
 
 	@Override
-	public double getZ() {
-		return z;
-	}
-
-	@Override
 	public boolean isVisible() {
 		return is_visible;
 	}

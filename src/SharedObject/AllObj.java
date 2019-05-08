@@ -8,6 +8,7 @@ import character.Puppy;
 import character.Puppy1;
 import character.Puppy2;
 import constant.Img;
+import gameManager.Score;
 import item.Gift;
 import item.Item;
 import javafx.scene.canvas.GraphicsContext;
@@ -28,6 +29,7 @@ public class AllObj extends AllObjList implements Renderable{
 	private static boolean goUp2, goRight2, goLeft2, attacking2;
 	private ArrayList<Hitbox> blocks = Block.getBlocks();    
 	private Block allBlocks = Block.getBlockInstance();
+	private Score score = new Score();
 	
 	private static Ghost ghost1 = new Ghost(3);    
 
@@ -75,12 +77,6 @@ public class AllObj extends AllObjList implements Renderable{
 			player2.takeDamageBy(ghost);
 			}
 	}
-	
-	@Override
-	public double getZ() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public void draw(GraphicsContext gc) {
@@ -101,6 +97,8 @@ public class AllObj extends AllObjList implements Renderable{
 		for(Gift gift: AllObj.getGiftsList()) {
 			gift.draw(gc);
 		}
+		//Score
+		score.draw(gc);
 		//drawHitbox
 		drawHitbox(gc);
 		

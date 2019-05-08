@@ -1,8 +1,11 @@
 package item;
 
+import java.util.Random;
+
 import SharedObject.AllObj;
 import character.Puppy;
 import constant.Img;
+import gameManager.Score;
 import logic.Hitbox;
 import logic.Point;
 import others.Block;
@@ -25,8 +28,9 @@ public class Gift extends Item implements Randomable{
 	
 	public void update(Puppy puppy) {
 		if(getHitbox().isOverlapping(puppy.getHitbox())) {
-			puppy.setItem((int)Math.random()*4);
+			puppy.setItem(new Random().nextInt(4));
 			AllObj.getGiftsList().remove(this);
+			Score.increasing();
 		}
 	}
 

@@ -67,12 +67,7 @@ public class Ghost extends Character implements Renderable {
 		if(puppy.getY()>y) y+=speed;
 		if(puppy.getY()<y) y-=speed;
 	}
-
-	@Override
-	public double getZ() {
-		return z;
-	}
-
+	
 	@Override
 	public void draw(GraphicsContext gc) {
 		gc.drawImage(ghostIMG, x, y);		

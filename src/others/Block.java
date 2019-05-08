@@ -49,10 +49,6 @@ public class Block implements Renderable{
 		return  instance.blocks;
 	}
 
-	@Override
-	public double getZ() {
-		return 0;
-	}
 
 	@Override
 	public void draw(GraphicsContext gc) {

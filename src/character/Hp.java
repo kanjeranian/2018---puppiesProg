@@ -26,13 +26,6 @@ public class Hp implements Renderable {
 		hp=90;
 	}
 
-
-	@Override
-	public double getZ() {
-		return z;
-	}
-
-
 	@Override
 	public void draw(GraphicsContext gc) {
 		gc.setFill(Color.rgb(201, 199, 197));
