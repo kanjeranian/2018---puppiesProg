@@ -34,6 +34,8 @@ public class Ghost extends Character implements Renderable {
 	
 	public Ghost(int z) {
 		super(0, 0, z);
+		x=Math.random()*1200;
+		y=Math.random()*900;
 		speed = 0.5;
 		hp = new Hp(x+28,y-39,z+0.5);
 	}
@@ -46,6 +48,7 @@ public class Ghost extends Character implements Renderable {
 		moveToPup(puppy);		
 		if(isLeft==true) {
 			hp.setPoint(x+28, y-39);
+			hitbox.setRectangle(x, y, width, height);
 			return;
 		}
 		hp.setPoint(x+57, y-39);
