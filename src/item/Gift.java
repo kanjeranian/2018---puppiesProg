@@ -28,8 +28,8 @@ public class Gift extends Item implements Randomable{
 	
 	public void update(Puppy puppy) {
 		if(getHitbox().isOverlapping(puppy.getHitbox())) {
-			puppy.setItem(new Random().nextInt(4));
-//			puppy.setItem(4);
+//			puppy.setItem(new Random().nextInt(4));
+			puppy.setItem(4);
 			AllObj.getGiftsList().remove(this);
 			Score.increasing();
 		}
