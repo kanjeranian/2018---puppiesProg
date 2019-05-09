@@ -10,6 +10,7 @@ import java.util.Random;
 import SharedObject.AllObj;
 import SharedObject.AllObjList;
 import SharedObject.Renderable;
+import constant.Img;
 import item.BlueBall;
 import item.Item;
 
@@ -19,25 +20,34 @@ public class Ghost extends Character implements Renderable {
 	private static final double W = 178, H=216;
 	
 	public static final double DAMAGE = 0.5;
-	private static final Image GHOST_IMAGE_LEFT = new Image("file:res/ghostL.png");
-	private static final Image GHOST_IMAGE_Right = new Image("file:res/ghostR.png");
+	private static final Image GHOST_IMAGE_LEFT = Img.ghostL;
+	private static final Image GHOST_IMAGE_Right = Img.ghostR;
 	private Image ghostIMG = GHOST_IMAGE_LEFT;
 	
-	private Hitbox hitbox = new Hitbox();
+	private Hitbox hitbox = new Hitbox(0,0,W,H);
 	
 	private double width=W;
 	private double height=H;
 	private double speed;
-
 	private boolean isLeft;
 	
 	
 	public Ghost(int z) {
 		super(0, 0, z);
-		x=Math.random()*1200;
-		y=Math.random()*900;
 		speed = 0.5;
+		x=randomX();
+		y=randomY();
+		hitbox.setRectangle(x, y, width, height);
 		hp = new Hp(x+28,y-39,z+0.5);
+
+	}
+	
+	public static double randomX() {
+		return Math.random()*1200;
+	}
+	
+	public static double randomY() {
+		return Math.random()*900;
 	}
 	
 	public Hitbox getHitbox() {
