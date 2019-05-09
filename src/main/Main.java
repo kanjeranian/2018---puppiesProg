@@ -1,28 +1,11 @@
 package main;
 
-import java.util.ArrayList;
-
 import gameManager.GameManager;
 import gameManager.GameScreen;
-import gameManager.KeyPress;
-import javafx.animation.AnimationTimer;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.event.EventHandler;
-import javafx.scene.*;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.image.*;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.util.Duration;
-import logic.Point;
-import logic.Hitbox;
-import others.Block;
+
+import resource.SpriteAssets;
 
 public class Main extends Application {
     private GameScreen gameScreen;
@@ -33,7 +16,7 @@ public class Main extends Application {
 
     	gameScreen = new GameScreen();
     	gameManager = new GameManager(gameScreen);
-
+    	SpriteAssets.loadResource();
     	stage.setScene(gameScreen.getGameScene());
         stage.show();
                 
