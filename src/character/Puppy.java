@@ -77,12 +77,6 @@ public class Puppy extends Character implements Renderable{
 			if (item instanceof BrownBone) 	{i = new BrownBone	(x + WIDTH / 2, y + HEIGHT / 2, z + 0.1, true, false, isGoLeft);}
 			if (item instanceof GreenBone) 	{i = new GreenBone	(x + WIDTH / 2, y + HEIGHT / 2, z + 0.1, true, false, isGoLeft);}
 			if (item instanceof Heart) 		{i = new Heart		(x + WIDTH / 2, y + HEIGHT / 2, z + 0.1, true, false, isGoLeft, this);}
-//			if (item instanceof BlueBall) 	i = (BlueBall) 		item;
-//			if (item instanceof OrangeBall) i = (OrangeBall) 	item;
-//			if (item instanceof BrownBone) 	i = (BrownBone) 	item;
-//			if (item instanceof GreenBone) 	i = (GreenBone) 	item;
-//			if (item instanceof Heart) 		i = (Heart) 		item;
-//			ไม่รู้อะ ลองแบบนี้แล้วมันไม่ได้
 			AllObj.addToItemsList(i);
 		}
 		attackPress = true;
@@ -129,17 +123,21 @@ public class Puppy extends Character implements Renderable{
 	public void onCollideTop() {
 		speedY = speedY > 0 ? speedY : 0;
 		speedX = 0;
+//		System.out.println("onTop");
 
 	}
 
 	public void onCollideDown() {
 		speedY = speedY < 0 ? speedY : 0;
 		isJumping = false;
+//		System.out.println("onDown");
 
 	}
 
 	public void onCollideSide() {
-		speedX = 0;
+//		x+=0;
+		speedY = speedY > 0 ? speedY : 0;
+//		speedX = 0;
 	}
 
 //	public void setDogIMG(boolean goLeft) {
@@ -213,8 +211,8 @@ public class Puppy extends Character implements Renderable{
 		hitbox.setRectangle(x, y, WIDTH, HEIGHT);
 		hitboxHead.setRectangle(x, y, WIDTH, HEIGHT / 2);
 		hitboxFeet.setRectangle(x, y + HEIGHT / 2, WIDTH, HEIGHT / 2);
-		hitboxLeft.setRectangle(x, y, 10, HEIGHT - 20);
-		hitboxRight.setRectangle(x + WIDTH - 10, y, 10, HEIGHT - 20);
+		hitboxLeft.setRectangle(x, y+10, 10, HEIGHT - 20);
+		hitboxRight.setRectangle(x + WIDTH - 10, y+10, 10, HEIGHT - 20);
 	}
 	public void checkForUpdate(boolean goUp, boolean goLeft, boolean goRight) {
 		if (goUp)	 jump();
