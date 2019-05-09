@@ -1,7 +1,5 @@
 package resource;
 
-
-
 import java.awt.image.BufferedImage;
 
 import javafx.embed.swing.SwingFXUtils;

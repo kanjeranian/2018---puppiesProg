@@ -22,7 +22,6 @@ public class LogicLoop {
 				new KeyFrame(Duration.seconds(1./60), e -> {
 					createGhost();
 					createGift();
-					
 					keyPress.setKeyStatus();
 					AllObj.ALL.update();
 					AllObj.ALL.draw(gameScreen.getGc());				

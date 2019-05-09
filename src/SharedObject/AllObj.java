@@ -30,9 +30,6 @@ public class AllObj extends AllObjList implements Renderable{
 	private ArrayList<Hitbox> blocks = Block.getBlocks();    
 	private Block allBlocks = Block.getBlockInstance();
 	private Score score = new Score();
-	
-	private static Ghost ghost1 = new Ghost(3);    
-
 
 	private AllObj() {}
 	
@@ -41,7 +38,8 @@ public class AllObj extends AllObjList implements Renderable{
 		ghostUpdate();
 		giftUpdate();
 
-		for (Item item : AllObj.getItemsList()) {
+		for (Item item:new CopyOnWriteArrayList<Item>(getItemsList())) {
+//		for (Item item : AllObj.getItemsList()) {
 			item.update();
 		}
 	}

@@ -243,6 +243,7 @@ public class Puppy extends Character implements Renderable{
 		case 1: item = new OrangeBall	(x/2, y/2, z+0.1, true, false, isGoLeft); break;
 		case 2: item = new GreenBone	(x/2, y/2, z+0.1, true, false, isGoLeft); break;
 		case 3: item = new BrownBone	(x/2, y/2, z+0.1, true, false, isGoLeft); break;
+//		case 4: item = new BrownBone	(x/2, y/2, z+0.1, true, false, isGoLeft); break;
 		default:
 			break;
 		}
