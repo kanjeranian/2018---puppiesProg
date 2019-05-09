@@ -1,6 +1,5 @@
 package character;
 
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import SharedObject.AllObj;
@@ -18,8 +17,6 @@ import logic.Point;
 import logic.Hitbox;
 import others.Block;
 import others.Obj;
-import resource.Animation;
-import resource.SpriteAssets;
 
 public class Puppy extends Character implements Renderable{
 
@@ -31,6 +28,8 @@ public class Puppy extends Character implements Renderable{
 	protected double speedX = 0;
 	protected double speedY = 0;
 
+	protected Image DOG_IMAGE_LEFT;
+	protected Image DOG_IMAGE_RIGHT;
 	protected Image dogIMG; // เอาไว้เลือกว่าจะใช้ left หรือ right
 
 	protected Hitbox hitbox = new Hitbox();
@@ -44,24 +43,14 @@ public class Puppy extends Character implements Renderable{
 
 	protected Item item = new BlueBall(x / 2, y / 2, z + 0.1, true, false, isGoLeft);
 //	protected ArrayList<Item> releaseItem = new ArrayList<>();
-	
-	private Animation animLeft;
-	private Animation animRight;
 
-
-	public Puppy(double x, double y, double z, Image dogImage, int dogNum) {
+	public Puppy(double x, double y, double z,Image dogImageL, Image dogImageR, Image dogImage) {
 		super(x,y,z);
+		DOG_IMAGE_LEFT = dogImageL;
+		DOG_IMAGE_RIGHT = dogImageR;
 		dogIMG = dogImage;
 		hp = new Hp(x - 4, y - 36, z + 0.5); 
 		updateAllHitbox(x, y);
-		if(dogNum == 1) {
-			animLeft = new Animation(500, SpriteAssets.puppy1_L);
-			animRight = new Animation(500, SpriteAssets.puppy1_R);
-		}
-		else {
-			animLeft = new Animation(500, SpriteAssets.puppy2_L);
-			animRight = new Animation(500, SpriteAssets.puppy2_R);
-		}
 	}
 	
 
@@ -96,6 +85,7 @@ public class Puppy extends Character implements Renderable{
 	}
 
 	public void goLeft() {
+		dogIMG = DOG_IMAGE_LEFT;
 		for (Hitbox r : blocks) {
 			if (hitboxLeft.isOverlapping(r))
 				return;
@@ -105,6 +95,7 @@ public class Puppy extends Character implements Renderable{
 	}
 
 	public void goRight() {
+		dogIMG = DOG_IMAGE_RIGHT;
 		for (Hitbox r : blocks) {
 			if (hitboxRight.isOverlapping(r))
 				return;
@@ -129,15 +120,15 @@ public class Puppy extends Character implements Renderable{
 		speedX = 0;
 	}
 
-//	public void setDogIMG(boolean goLeft) {
-//		if (goLeft) {
-//			dogIMG = DOG_IMAGE_LEFT;
-//			System.out.println("left");
-//			return;
-//		}
-//		System.out.println("Right");
-//		dogIMG = DOG_IMAGE_RIGHT;
-//	}
+	public void setDogIMG(boolean goLeft) {
+		if (goLeft) {
+			dogIMG = DOG_IMAGE_LEFT;
+			System.out.println("left");
+			return;
+		}
+		System.out.println("Right");
+		dogIMG = DOG_IMAGE_RIGHT;
+	}
 
 	public boolean getIscollide() {
 		return isCollide;
@@ -145,18 +136,10 @@ public class Puppy extends Character implements Renderable{
 
 	@Override
 	public void draw(GraphicsContext gc) { // same as render
-		gc.drawImage(getCurrentAnimationFrame(), x, y);
+		gc.drawImage(dogIMG, x, y);
 		hp.draw(gc, (Renderable) this);
 	}
 
-	private Image getCurrentAnimationFrame() {
-		if(isGoLeft) {
-			return animLeft.getCurrentFrame();
-		}
-		else {
-			return animRight.getCurrentFrame();
-		}
-	}
 
 	public void accelerate(double accelerationX, double accelerationY) {
 		speedX += accelerationX;
@@ -235,6 +218,7 @@ public class Puppy extends Character implements Renderable{
 		case 1: item = new OrangeBall	(x/2, y/2, z+0.1, true, false, isGoLeft); break;
 		case 2: item = new GreenBone	(x/2, y/2, z+0.1, true, false, isGoLeft); break;
 		case 3: item = new BrownBone	(x/2, y/2, z+0.1, true, false, isGoLeft); break;
+//		case 4: item = new BrownBone	(x/2, y/2, z+0.1, true, false, isGoLeft); break;
 		default:
 			break;
 		}
