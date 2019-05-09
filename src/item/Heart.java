@@ -5,7 +5,8 @@ import javafx.scene.image.Image;
 
 public class Heart extends Item{
 	
-	public static final double DAMAGE = -2;
+	public static final double DAMAGE = -1;
+
 
 	public Heart(double x, double y, double z, 
 			boolean is_visible, boolean is_destroy,
