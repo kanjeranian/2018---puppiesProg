@@ -39,7 +39,6 @@ public class AllObj extends AllObjList implements Renderable{
 		giftUpdate();
 
 		for (Item item:new CopyOnWriteArrayList<Item>(getItemsList())) {
-//		for (Item item : AllObj.getItemsList()) {
 			item.update();
 		}
 	}
@@ -54,6 +53,10 @@ public class AllObj extends AllObjList implements Renderable{
 	private static void playerUpdate() {
 		player1.update(goUp1,goLeft1,goRight1,attacking1);
 		player2.update(goUp2,goLeft2,goRight2,attacking2);
+		for(Item item: new CopyOnWriteArrayList<Item>(getItemsList())) {
+			player1.takeDamageBy(item);
+			player2.takeDamageBy(item);
+		}
 	}
 	
 	private static void ghostUpdate() {

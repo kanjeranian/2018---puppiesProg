@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import SharedObject.AllObj;
+import SharedObject.AllObjList;
 import SharedObject.Renderable;
 import constant.Img;
 import item.BlueBall;
@@ -71,12 +72,18 @@ public class Puppy extends Character implements Renderable{
 			if (item == null)
 				return;
 			Item i = null;
-			if (item instanceof BlueBall) 	{i = new BlueBall(x + WIDTH / 2, y + HEIGHT / 2, z + 0.1, true, false, isGoLeft);}
-			if (item instanceof OrangeBall) {i = new OrangeBall(x + WIDTH / 2, y + HEIGHT / 2, z + 0.1, true, false, isGoLeft);}
-			if (item instanceof BrownBone) 	{i = new BrownBone(x + WIDTH / 2, y + HEIGHT / 2, z + 0.1, true, false, isGoLeft);}
-			if (item instanceof GreenBone) 	{i = new GreenBone(x + WIDTH / 2, y + HEIGHT / 2, z + 0.1, true, false, isGoLeft);}
+			if (item instanceof BlueBall) 	{i = new BlueBall	(x + WIDTH / 2, y + HEIGHT / 2, z + 0.1, true, false, isGoLeft);}
+			if (item instanceof OrangeBall) {i = new OrangeBall	(x + WIDTH / 2, y + HEIGHT / 2, z + 0.1, true, false, isGoLeft);}
+			if (item instanceof BrownBone) 	{i = new BrownBone	(x + WIDTH / 2, y + HEIGHT / 2, z + 0.1, true, false, isGoLeft);}
+			if (item instanceof GreenBone) 	{i = new GreenBone	(x + WIDTH / 2, y + HEIGHT / 2, z + 0.1, true, false, isGoLeft);}
+			if (item instanceof Heart) 		{i = new Heart		(x + WIDTH / 2, y + HEIGHT / 2, z + 0.1, true, false, isGoLeft, this);}
+//			if (item instanceof BlueBall) 	i = (BlueBall) 		item;
+//			if (item instanceof OrangeBall) i = (OrangeBall) 	item;
+//			if (item instanceof BrownBone) 	i = (BrownBone) 	item;
+//			if (item instanceof GreenBone) 	i = (GreenBone) 	item;
+//			if (item instanceof Heart) 		i = (Heart) 		item;
+//			ไม่รู้อะ ลองแบบนี้แล้วมันไม่ได้
 			AllObj.addToItemsList(i);
-//			System.out.println("i damage"+i.getDamage());			
 		}
 		attackPress = true;
 	}
@@ -86,7 +93,12 @@ public class Puppy extends Character implements Renderable{
 		if(obj instanceof Ghost && ((Ghost)obj).getHitbox().isOverlapping(hitbox)) { 
 			hp.decrease(((Ghost)obj).DAMAGE);
 		}
-		if(obj instanceof Heart) { hp.decrease(((Heart)obj).DAMAGE);}
+		else if(obj instanceof Heart && 
+				((Item)obj).getHitbox().isOverlapping(hitbox) &&
+				((Heart)obj).getPuppy()!=this) { 
+			Item item = (Item) obj;
+			hp.decrease(((Heart)obj).DAMAGE);}
+			AllObjList.getItemsList().remove(item);
 	}
 
 	public void jump() {
@@ -218,12 +230,14 @@ public class Puppy extends Character implements Renderable{
 	}
 	public void update(boolean goUp, boolean goLeft, boolean goRight, boolean attacking) {
 		if (hp.getHp() > 0) {
+			firstDead = true;
 			checkForUpdate(goUp, goLeft, goRight);
 			if (attacking) { attack(); } else { attackPress = false; }
 			move();
 			accelerate(0, GRAVITY);
 			updateAllHitbox(x, y);
 			hp.setPoint(x + 3, y - 36);
+//			dogIMG = goLeft? 
 			return;
 		}
 		
@@ -244,7 +258,7 @@ public class Puppy extends Character implements Renderable{
 		case 1: item = new OrangeBall	(x/2, y/2, z+0.1, true, false, isGoLeft); break;
 		case 2: item = new GreenBone	(x/2, y/2, z+0.1, true, false, isGoLeft); break;
 		case 3: item = new BrownBone	(x/2, y/2, z+0.1, true, false, isGoLeft); break;
-		case 4: item = new Heart		(x/2, y/2, z+0.1, true, false, isGoLeft); break;
+		case 4: item = new Heart		(x/2, y/2, z+0.1, true, false, isGoLeft, this); break;
 		default:
 			break;
 		}
