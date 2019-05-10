@@ -19,18 +19,20 @@ public class Block implements Renderable{
 	
 	private Block() {
 		// 11 อันนี้คือตำแหน่งเริ่มต้นของ แต่ละ platform สามารถขยับได้
-		addBlock(827,139);
-	   	addBlock(508,206);
-	   	addBlock(0,240);
-	   	addBlock(1017,308);
-	   	addBlock(269,367);
-	   	addBlock(769,478);
-	   	addBlock(59,537);
-	   	addBlock(1051,622);
+		addBlock(0,240);
+		addBlock(59,537);
+		addBlock(269,367);
+//		addBlock(278,710);
+		addBlock(278,780);
+//	   	addBlock(508,206);
+	   	addBlock(518,206);
 	   	addBlock(515,605);
-	   	addBlock(278,710);
-	   	addBlock(800,743);
-	   	blocks.add(new Hitbox(new Point(0,-100), new Point(1200,0))); //top
+	   	addBlock(769,478);
+//	   	addBlock(800,743);
+	   	addBlock(800,109);
+	   	addBlock(1017,308);
+	   	addBlock(1051,622);
+//	   	blocks.add(new Hitbox(new Point(0,-300), new Point(1200,-100))); //top
 	   	blocks.add(new Hitbox(new Point(-100,-100), new Point(0,900))); //left
 	   	blocks.add(new Hitbox(new Point(1200,0), new Point(1300,900))); //right
 	   	blocks.add(new Hitbox(new Point(0,841), new Point(1200,900))); //อันนี้คือพื้น

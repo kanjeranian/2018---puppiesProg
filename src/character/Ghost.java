@@ -11,6 +11,7 @@ import SharedObject.AllObj;
 import SharedObject.AllObjList;
 import SharedObject.Renderable;
 import item.BlueBall;
+import item.Heart;
 import item.Item;
 
 public class Ghost extends Character implements Renderable {
@@ -91,10 +92,13 @@ public class Ghost extends Character implements Renderable {
 	@Override
 	public void takeDamageBy(Obj obj) {
 		if(obj instanceof Item && ((Item)obj).getHitbox().isOverlapping(hitbox)) { 
-			Item item = (Item) obj;
-			hp.decrease(item.getDamage());
-			AllObjList.getItemsList().remove(item);
-			
+			if(!(obj instanceof Heart)) {
+				Item item = (Item) obj;
+				hp.decrease(item.getDamage());
+				AllObjList.getItemsList().remove(item);
+			}else {
+				//จัดการกับ hp ของผีเวลาโดนหัวใจ
+			}
 		}
 	}
 

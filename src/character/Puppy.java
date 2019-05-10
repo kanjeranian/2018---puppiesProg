@@ -4,10 +4,12 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import SharedObject.AllObj;
+import SharedObject.AllObjList;
 import SharedObject.Renderable;
 import constant.Img;
 import item.BlueBall;
 import item.BrownBone;
+import item.Gift;
 import item.GreenBone;
 import item.Heart;
 import item.Item;
@@ -70,12 +72,12 @@ public class Puppy extends Character implements Renderable{
 			if (item == null)
 				return;
 			Item i = null;
-			if (item instanceof BlueBall) 	{i = new BlueBall(x + WIDTH / 2, y + HEIGHT / 2, z + 0.1, true, false, isGoLeft);}
-			if (item instanceof OrangeBall) {i = new OrangeBall(x + WIDTH / 2, y + HEIGHT / 2, z + 0.1, true, false, isGoLeft);}
-			if (item instanceof BrownBone) 	{i = new BrownBone(x + WIDTH / 2, y + HEIGHT / 2, z + 0.1, true, false, isGoLeft);}
-			if (item instanceof GreenBone) 	{i = new GreenBone(x + WIDTH / 2, y + HEIGHT / 2, z + 0.1, true, false, isGoLeft);}
+			if (item instanceof BlueBall) 	{i = new BlueBall	(x + WIDTH / 2, y + HEIGHT / 2, z + 0.1, true, false, isGoLeft);}
+			if (item instanceof OrangeBall) {i = new OrangeBall	(x + WIDTH / 2, y + HEIGHT / 2, z + 0.1, true, false, isGoLeft);}
+			if (item instanceof BrownBone) 	{i = new BrownBone	(x + WIDTH / 2, y + HEIGHT / 2, z + 0.1, true, false, isGoLeft);}
+			if (item instanceof GreenBone) 	{i = new GreenBone	(x + WIDTH / 2, y + HEIGHT / 2, z + 0.1, true, false, isGoLeft);}
+			if (item instanceof Heart) 		{i = new Heart		(x + WIDTH / 2, y + HEIGHT / 2, z + 0.1, true, false, isGoLeft, this);}
 			AllObj.addToItemsList(i);
-//			System.out.println("i damage"+i.getDamage());			
 		}
 		attackPress = true;
 	}
@@ -85,7 +87,12 @@ public class Puppy extends Character implements Renderable{
 		if(obj instanceof Ghost && ((Ghost)obj).getHitbox().isOverlapping(hitbox)) { 
 			hp.decrease(((Ghost)obj).DAMAGE);
 		}
-		if(obj instanceof Heart) { hp.decrease(((Heart)obj).DAMAGE);}
+		else if(obj instanceof Heart && 
+				((Item)obj).getHitbox().isOverlapping(hitbox) &&
+				((Heart)obj).getPuppy()!=this) { 
+			Item item = (Item) obj;
+			hp.decrease(((Heart)obj).DAMAGE);}
+			AllObjList.getItemsList().remove(item);
 	}
 
 	public void jump() {
@@ -116,17 +123,21 @@ public class Puppy extends Character implements Renderable{
 	public void onCollideTop() {
 		speedY = speedY > 0 ? speedY : 0;
 		speedX = 0;
+//		System.out.println("onTop");
 
 	}
 
 	public void onCollideDown() {
 		speedY = speedY < 0 ? speedY : 0;
 		isJumping = false;
+//		System.out.println("onDown");
 
 	}
 
 	public void onCollideSide() {
-		speedX = 0;
+//		x+=0;
+		speedY = speedY > 0 ? speedY : 0;
+//		speedX = 0;
 	}
 
 //	public void setDogIMG(boolean goLeft) {
@@ -200,8 +211,8 @@ public class Puppy extends Character implements Renderable{
 		hitbox.setRectangle(x, y, WIDTH, HEIGHT);
 		hitboxHead.setRectangle(x, y, WIDTH, HEIGHT / 2);
 		hitboxFeet.setRectangle(x, y + HEIGHT / 2, WIDTH, HEIGHT / 2);
-		hitboxLeft.setRectangle(x, y, 10, HEIGHT - 20);
-		hitboxRight.setRectangle(x + WIDTH - 10, y, 10, HEIGHT - 20);
+		hitboxLeft.setRectangle(x, y+10, 10, HEIGHT - 20);
+		hitboxRight.setRectangle(x + WIDTH - 10, y+10, 10, HEIGHT - 20);
 	}
 	public void checkForUpdate(boolean goUp, boolean goLeft, boolean goRight) {
 		if (goUp)	 jump();
@@ -217,12 +228,14 @@ public class Puppy extends Character implements Renderable{
 	}
 	public void update(boolean goUp, boolean goLeft, boolean goRight, boolean attacking) {
 		if (hp.getHp() > 0) {
+			firstDead = true;
 			checkForUpdate(goUp, goLeft, goRight);
 			if (attacking) { attack(); } else { attackPress = false; }
 			move();
 			accelerate(0, GRAVITY);
 			updateAllHitbox(x, y);
 			hp.setPoint(x + 3, y - 36);
+//			dogIMG = goLeft? 
 			return;
 		}
 		
@@ -243,7 +256,7 @@ public class Puppy extends Character implements Renderable{
 		case 1: item = new OrangeBall	(x/2, y/2, z+0.1, true, false, isGoLeft); break;
 		case 2: item = new GreenBone	(x/2, y/2, z+0.1, true, false, isGoLeft); break;
 		case 3: item = new BrownBone	(x/2, y/2, z+0.1, true, false, isGoLeft); break;
-//		case 4: item = new BrownBone	(x/2, y/2, z+0.1, true, false, isGoLeft); break;
+		case 4: item = new Heart		(x/2, y/2, z+0.1, true, false, isGoLeft, this); break;
 		default:
 			break;
 		}
