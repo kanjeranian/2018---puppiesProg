@@ -10,14 +10,20 @@ import java.util.Random;
 import SharedObject.AllObj;
 import SharedObject.AllObjList;
 import SharedObject.Renderable;
+import item.Ball;
 import item.BlueBall;
+import item.BrownBone;
 import item.Heart;
 import item.Item;
+import item.OrangeBall;
 
 public class Ghost extends Character implements Renderable {
 	
 	private boolean is_visible, is_destroyed;
 	private static final double W = 178, H=216;
+	private static final double MAX_SPEED = 5;
+	private static final double MIN_SPEED = 0.2;
+	
 	
 	public static final double DAMAGE = 0.5;
 	private static final Image GHOST_IMAGE_LEFT = new Image("file:res/ghostL.png");
@@ -89,16 +95,33 @@ public class Ghost extends Character implements Renderable {
 		return is_visible;
 	}
 
+//	@Override
+//	public void takeDamageBy(Obj obj) {
+//		if(obj instanceof Item && ((Item)obj).getHitbox().isOverlapping(hitbox)) { 
+//			
+//			
+//			if(!(obj instanceof Heart)) {
+//				Item item = (Item) obj;
+//				hp.decrease(item.getDamage());
+//				AllObjList.getItemsList().remove(item);
+//			}else {
+//				//จัดการกับ hp ของผีเวลาโดนหัวใจ
+//			}
+//		}
+//	}
+	
 	@Override
 	public void takeDamageBy(Obj obj) {
 		if(obj instanceof Item && ((Item)obj).getHitbox().isOverlapping(hitbox)) { 
 			if(!(obj instanceof Heart)) {
 				Item item = (Item) obj;
+				if(item instanceof Ball) {
+					if(item instanceof BlueBall) changeSpeed(((BlueBall)item).CHANGE_SPEED);
+					else if(item instanceof OrangeBall) changeSpeed(((OrangeBall)item).CHANGE_SPEED);
+				}
 				hp.decrease(item.getDamage());
 				AllObjList.getItemsList().remove(item);
-			}else {
-				//จัดการกับ hp ของผีเวลาโดนหัวใจ
-			}
+			}else {}
 		}
 	}
 
@@ -108,6 +131,12 @@ public class Ghost extends Character implements Renderable {
 
 	public Object getHp() {
 		return hp;
+	}
+	
+	public void changeSpeed(double x) {
+		speed=speed+x;
+		speed=speed<MIN_SPEED?MIN_SPEED:speed;
+		speed=speed>MAX_SPEED?MAX_SPEED:speed;
 	}
 
 }
