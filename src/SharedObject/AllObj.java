@@ -111,8 +111,8 @@ public class AllObj extends AllObjList implements Renderable{
 		for (Hitbox r: blocks) {
 			drawRectHitBox(gc,r);
 		}
-		drawRectHitBox(gc,player1.getHitbox());
-		drawRectHitBox(gc,player2.getHitbox());
+		drawRectHitBox(gc, player1.getHitbox());
+		drawRectHitBox(gc, player2.getHitbox());
 		//hitboxGhost
 		for(Ghost ghost: getGhostsList()) 
 		{

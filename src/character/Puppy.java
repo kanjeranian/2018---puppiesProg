@@ -28,6 +28,7 @@ public class Puppy extends Character implements Renderable{
 	protected static final double WIDTH = Img.puppy.getWidth();
 	protected static final double HEIGHT = Img.puppy.getHeight();
 	protected static final double GRAVITY = 3;
+	protected static final double FRICTION = 0.8;
 	protected static final ArrayList<Hitbox> blocks = Block.getBlocks();
 
 	protected double speedX = 0;
@@ -105,6 +106,7 @@ public class Puppy extends Character implements Renderable{
 	public void goLeft() {
 		for (Hitbox r : blocks) {
 			if (hitboxLeft.isOverlapping(r))
+//				x-=1;
 				return;
 		}
 		x -= 2.5;
@@ -114,6 +116,7 @@ public class Puppy extends Character implements Renderable{
 	public void goRight() {
 		for (Hitbox r : blocks) {
 			if (hitboxRight.isOverlapping(r))
+//				x+=1;
 				return;
 		}
 		x += 2.5;
@@ -136,7 +139,7 @@ public class Puppy extends Character implements Renderable{
 
 	public void onCollideSide() {
 //		x+=0;
-//		speedY = speedY > 0 ? speedY : 0;
+		speedY = speedY > 0 ? speedY : 0;
 //		speedX = 0;
 	}
 
@@ -154,10 +157,22 @@ public class Puppy extends Character implements Renderable{
 		return isCollide;
 	}
 
+	// for debugging 
+	private void drawRectHitBox(GraphicsContext gc,Hitbox r) {
+		Point tl = r.getTopLeft(), br = r.getBottomRight();
+		gc.strokeRect(tl.getX(), tl.getY(), br.getX()-tl.getX(), br.getY()-tl.getY());
+	}
+	
 	@Override
 	public void draw(GraphicsContext gc) { // same as render
 		gc.drawImage(getCurrentAnimationFrame(), x, y);
 		hp.draw(gc, (Renderable) this);
+		drawRectHitBox(gc, hitboxRight);
+		drawRectHitBox(gc, hitboxLeft);
+		drawRectHitBox(gc, hitboxFeet);
+		drawRectHitBox(gc, hitboxHead);
+		gc.setLineWidth(3);
+		gc.strokeText(String.format("speedX = %.2f\n speedY = %.2f\n", speedX, speedY), x - 10, y);
 	}
 
 	private Image getCurrentAnimationFrame() {
@@ -183,21 +198,30 @@ public class Puppy extends Character implements Renderable{
 	}
 
 	public void move() {
-		x += speedX;
-		if (speedY > 0) {
+//		double signX = Math.signum(speedX);
+//		for (int i = 0; i < Math.abs(speedX); i++) {
+//			x += signX;
+//			updateAllHitbox(x, y);
+//			for (Hitbox r : blocks) {
+//				if (hitboxLeft.isOverlapping(r) || hitboxRight.isOverlapping(r)) {
+//					x -= signX; 
+//					return;
+//				}
+//			}
+//
+//		}
+		double signY = Math.signum(speedY);
 			for (int i = 0; i < Math.abs(speedY); i++) {
-				y += 1;
+				y += signY;
 				updateAllHitbox(x, y);
 				for (Hitbox r : blocks) {
 					if (hitboxFeet.isOverlapping(r)) {
+						isJumping = false;
 						return;
 					}
 				}
 
 			}
-		} else {
-			y += speedY;
-		}
 	}
 
 	//hitBox, all Update, getters
@@ -209,10 +233,10 @@ public class Puppy extends Character implements Renderable{
 	
 	public void updateAllHitbox(double x, double y) {
 		hitbox.setRectangle(x, y, WIDTH, HEIGHT);
-		hitboxHead.setRectangle(x, y, WIDTH, HEIGHT / 2);
-		hitboxFeet.setRectangle(x, y + HEIGHT / 2, WIDTH, HEIGHT / 2);
-		hitboxLeft.setRectangle(x, y+10, 10, HEIGHT - 20);
-		hitboxRight.setRectangle(x + WIDTH - 10, y+10, 10, HEIGHT - 20);
+		hitboxHead.setRectangle(x+1, y, WIDTH-2, 1);
+		hitboxFeet.setRectangle(x+4, y+HEIGHT - 1, WIDTH-8, 1);
+		hitboxLeft.setRectangle(x, y+4, 2, HEIGHT-8);
+		hitboxRight.setRectangle(x + WIDTH-2, y+4, 2, HEIGHT-8);
 	}
 	public void checkForUpdate(boolean goUp, boolean goLeft, boolean goRight) {
 		if (goUp)	 jump();
@@ -226,6 +250,8 @@ public class Puppy extends Character implements Renderable{
 			}
 		}
 	}
+	
+	
 	public void update(boolean goUp, boolean goLeft, boolean goRight, boolean attacking) {
 		if (hp.getHp() > 0) {
 			firstDead = true;

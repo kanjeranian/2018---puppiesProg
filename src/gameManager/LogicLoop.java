@@ -20,7 +20,7 @@ public class LogicLoop {
 		keyPress = gameScreen.getKeyPress();
 		timeline = new Timeline(
 				new KeyFrame(Duration.seconds(1./60), e -> {
-					createGhost();
+//					createGhost();
 					createGift();
 					keyPress.setKeyStatus();
 					AllObj.ALL.update();
