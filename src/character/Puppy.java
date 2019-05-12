@@ -136,7 +136,7 @@ public class Puppy extends Character implements Renderable{
 
 	public void onCollideSide() {
 //		x+=0;
-		speedY = speedY > 0 ? speedY : 0;
+//		speedY = speedY > 0 ? speedY : 0;
 //		speedX = 0;
 	}
 
