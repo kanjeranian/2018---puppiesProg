@@ -1,9 +1,9 @@
 package gameManager;
 
-import SharedObject.Renderable;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import sharedObject.Renderable;
 
 public class Score implements Renderable{
 	private static int score=0;
@@ -27,6 +27,10 @@ public class Score implements Renderable{
 	@Override
 	public boolean isVisible() {
 		return true;
+	}
+	
+	public static int getScore() {
+		return score;
 	}
 	
 	

@@ -1,8 +1,8 @@
 package character;
 
-import SharedObject.Renderable;
 import javafx.scene.canvas.GraphicsContext;
 import others.Obj;
+import sharedObject.Renderable;
 
 public abstract class Character extends Obj implements Renderable {
 

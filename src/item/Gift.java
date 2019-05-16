@@ -2,13 +2,13 @@ package item;
 
 import java.util.Random;
 
-import SharedObject.AllObj;
 import character.Puppy;
 import constant.Img;
 import gameManager.Score;
 import logic.Hitbox;
 import logic.Point;
 import others.Block;
+import sharedObject.AllObj;
 
 public class Gift extends Item implements Randomable{
 	private static final double DAMAGE = 0;

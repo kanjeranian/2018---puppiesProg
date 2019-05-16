@@ -1,16 +1,16 @@
 package gameManager;
 
-import SharedObject.AllObj;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
+import sharedObject.AllObj;
 
 
 public class KeyPress {
 	
     private Scene scene;
-	boolean goUp1, goRight1, goLeft1, attacking1;
-	boolean goUp2, goRight2, goLeft2, attacking2;
+	private boolean goUp1, goRight1, goLeft1, attacking1;
+	private boolean goUp2, goRight2, goLeft2, attacking2;
 	
 	public KeyPress(Scene scene) {
 		this.scene = scene;

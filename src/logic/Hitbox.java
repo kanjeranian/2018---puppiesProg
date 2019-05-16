@@ -21,11 +21,6 @@ public class Hitbox {
 		this.bottomRight = new Point(x+width, y+height);
 	}
 	
-//	public Hitbox(Point topLeft) { //ถ้าใส่มาอันเดียวคือ block เลย size 149,34
-//		super();
-//		this.topLeft = topLeft;
-//		this.bottomRight = new Point(topLeft.getX()+149, topLeft.getY()+34);
-//	}
 	
 	public boolean isOverlapping(Hitbox other) {
 		if (getTopLeft().getY() > other.getBottomRight().getY()

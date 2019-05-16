@@ -2,10 +2,10 @@ package others;
 
 import java.util.ArrayList;
 
-import SharedObject.Renderable;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import logic.Point;
+import sharedObject.Renderable;
 import logic.Hitbox;
 
 public class Block implements Renderable{

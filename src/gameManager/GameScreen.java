@@ -2,7 +2,6 @@ package gameManager;
 
 import java.util.ArrayList;
 
-import SharedObject.AllObj;
 import character.Ghost;
 import character.Puppy;
 import character.Puppy1;
@@ -23,6 +22,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import logic.Point;
 import others.Block;
+import sharedObject.AllObj;
 import logic.Hitbox;
 
 public class GameScreen extends StackPane {

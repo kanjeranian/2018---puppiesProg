@@ -1,4 +1,4 @@
-package SharedObject;
+package sharedObject;
 
 import java.util.ArrayList;
 
@@ -21,7 +21,7 @@ public class AllObjList {
 	public static void update() {
 		// delete destroy objected inList
 		updatePuppiesList();
-		updateGhostsLis();
+		updateGhostsList();
 		updateItemsList();
 	}
 	
@@ -61,7 +61,7 @@ public class AllObjList {
 	}
 	
 	//update
-	public static void updateGhostsLis() {
+	public static void updateGhostsList() {
 		for(Ghost ghost: getGhostsList()) {
 			if(ghost.isDestroyed()) getGhostsList().remove(ghost);
 		}

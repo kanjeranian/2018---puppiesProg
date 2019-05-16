@@ -1,9 +1,9 @@
 package character;
 
-import SharedObject.Renderable;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import logic.Hitbox;
+import sharedObject.Renderable;
 
 public class Hp implements Renderable {
 	
@@ -19,7 +19,7 @@ public class Hp implements Renderable {
 	private double hp;
 	
 	
-	Hp(double x,double y,double z){
+	public Hp(double x,double y,double z){
 		this.x=x;
 		this.y=y;
 		this.z=z;
@@ -51,10 +51,6 @@ public class Hp implements Renderable {
 	@Override
 	public boolean isVisible() {
 		return is_visible;
-	}
-	
-	public void update() {
-		
 	}
 	
 	public void setPoint(double x,double y) {

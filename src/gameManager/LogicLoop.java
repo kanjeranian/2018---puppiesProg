@@ -1,11 +1,11 @@
 package gameManager;
 
-import SharedObject.AllObj;
 import character.Ghost;
 import item.Gift;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
+import sharedObject.AllObj;
 
 public class LogicLoop {
 	
@@ -13,18 +13,26 @@ public class LogicLoop {
 	private GameScreen gameScreen;
 	private KeyPress keyPress;
 	private int ghostCount = 0;
-	private int giftCount=-7; private boolean hasGiftOnScreen=false;
-	
+	private int giftCount=-7; 
+	private boolean hasGiftOnScreen=false;
+	private static boolean gameOver = false;
+	private static boolean isInGame = false;
+
 	public  LogicLoop(GameScreen gameScreen) {
 		this.gameScreen = gameScreen;
 		keyPress = gameScreen.getKeyPress();
 		timeline = new Timeline(
 				new KeyFrame(Duration.seconds(1./60), e -> {
-//					createGhost();
-					createGift();
-					keyPress.setKeyStatus();
-					AllObj.ALL.update();
-					AllObj.ALL.draw(gameScreen.getGc());				
+					if (isInGame) {
+						System.out.println("Loop");
+						if(!gameOver) {
+							createGhost();
+							createGift();
+							keyPress.setKeyStatus();
+							AllObj.ALL.update();
+							AllObj.ALL.draw(gameScreen.getGc());										
+						}						
+					}
 				}));
 		timeline.setCycleCount(Timeline.INDEFINITE);
 		timeline.play();
@@ -48,6 +56,14 @@ public class LogicLoop {
 			}
 			giftCount+=1;
 		}
+	}
+	
+	public static void gameOver() {
+		gameOver=true;
+	}
+	
+	public static void isInGame(boolean isInGame) {
+		LogicLoop.isInGame = isInGame;
 	}
 	
 	

@@ -1,4 +1,4 @@
-package SharedObject;
+package sharedObject;
 
 import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -8,13 +8,16 @@ import character.Puppy;
 import character.Puppy1;
 import character.Puppy2;
 import constant.Img;
+import gameManager.GameScreen;
 import gameManager.Score;
 import item.Gift;
 import item.Item;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import logic.Hitbox;
 import logic.Point;
+import main.Main;
 import others.Block;
 
 
@@ -29,7 +32,7 @@ public class AllObj extends AllObjList implements Renderable{
 	private static boolean goUp2, goRight2, goLeft2, attacking2;
 	private ArrayList<Hitbox> blocks = Block.getBlocks();    
 	private Block allBlocks = Block.getBlockInstance();
-	private Score score = new Score();
+	private static Score score = new Score();
 
 	private AllObj() {}
 	
@@ -81,27 +84,32 @@ public class AllObj extends AllObjList implements Renderable{
 
 	@Override
 	public void draw(GraphicsContext gc) {
-		gc.drawImage(Img.bg, 0, 0);	
-		allBlocks.draw(gc);
-		player1.draw(gc);
-		player2.draw(gc);
-		//drawGhost
-		for(Ghost ghost: getGhostsList()) 
-		{
-			ghost.draw(gc);			
+		if(player1.isDead()&&player2.isDead()) {
+			Main.getStage().setScene(Main.getGameOverScreen());
+			clearAllObj();
+		}else {
+			gc.drawImage(Img.bg, 0, 0);	
+			allBlocks.draw(gc);
+			player1.draw(gc);
+			player2.draw(gc);
+			//drawGhost
+			for(Ghost ghost: getGhostsList()) 
+			{
+				ghost.draw(gc);			
+			}
+			//drawItem
+			for (Item i : AllObj.getItemsList()) {
+				i.draw(gc);
+			}
+			//drawGift
+			for(Gift gift: AllObj.getGiftsList()) {
+				gift.draw(gc);
+			}
+			//Score
+			score.draw(gc);
+			//drawHitbox
+//		drawHitbox(gc);			
 		}
-		//drawItem
-		for (Item i : AllObj.getItemsList()) {
-			i.draw(gc);
-		}
-		//drawGift
-		for(Gift gift: AllObj.getGiftsList()) {
-			gift.draw(gc);
-		}
-		//Score
-		score.draw(gc);
-		//drawHitbox
-		drawHitbox(gc);
 		
 	}
 	
@@ -152,5 +160,19 @@ public class AllObj extends AllObjList implements Renderable{
 		this.goLeft2 	= goLeft2;
 		this.attacking2 = attacking2;
 	}
+	
+	public void clearAllObj() {
+		player1 = new Puppy1(W/2, H/2,1);
+		player2 = new Puppy2(W/2, H/2,2);
+		ALL.ghostsList.clear();
+		ALL.puppiesList.clear();
+		ALL.itemsList.clear();
+		ALL.giftsList.clear();
+	}
+	
+	public static void resetScore() {
+		score = new Score();
+	}
+	
 
 }

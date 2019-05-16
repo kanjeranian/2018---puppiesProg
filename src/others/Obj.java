@@ -1,8 +1,8 @@
 package others;
 
-import SharedObject.Renderable;
 import character.Character;
 import character.Hp;
+import sharedObject.Renderable;
 
 public abstract class Obj implements Renderable{
 

@@ -4,12 +4,12 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import logic.Point;
 import others.Obj;
+import sharedObject.AllObj;
+import sharedObject.AllObjList;
+import sharedObject.Renderable;
 import logic.Hitbox;
 import java.util.Random;
 
-import SharedObject.AllObj;
-import SharedObject.AllObjList;
-import SharedObject.Renderable;
 import item.Ball;
 import item.BlueBall;
 import item.BrownBone;

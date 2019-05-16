@@ -1,11 +1,11 @@
 package item;
 
-import SharedObject.Renderable;
 import character.Ghost;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import logic.Hitbox;
 import others.Obj;
+import sharedObject.Renderable;
 
 public abstract class Item extends Obj implements Renderable {
 	private Hitbox hitbox;

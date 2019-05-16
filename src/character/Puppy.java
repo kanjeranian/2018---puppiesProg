@@ -3,9 +3,6 @@ package character;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import SharedObject.AllObj;
-import SharedObject.AllObjList;
-import SharedObject.Renderable;
 import constant.Img;
 import item.BlueBall;
 import item.BrownBone;
@@ -22,6 +19,9 @@ import others.Block;
 import others.Obj;
 import resource.Animation;
 import resource.SpriteAssets;
+import sharedObject.AllObj;
+import sharedObject.AllObjList;
+import sharedObject.Renderable;
 
 public class Puppy extends Character implements Renderable{
 
@@ -167,12 +167,12 @@ public class Puppy extends Character implements Renderable{
 	public void draw(GraphicsContext gc) { // same as render
 		gc.drawImage(getCurrentAnimationFrame(), x, y);
 		hp.draw(gc, (Renderable) this);
-		drawRectHitBox(gc, hitboxRight);
-		drawRectHitBox(gc, hitboxLeft);
-		drawRectHitBox(gc, hitboxFeet);
-		drawRectHitBox(gc, hitboxHead);
-		gc.setLineWidth(3);
-		gc.strokeText(String.format("speedX = %.2f\n speedY = %.2f\n", speedX, speedY), x - 10, y);
+//		drawRectHitBox(gc, hitboxRight);
+//		drawRectHitBox(gc, hitboxLeft);
+//		drawRectHitBox(gc, hitboxFeet);
+//		drawRectHitBox(gc, hitboxHead);
+//		gc.setLineWidth(3);
+//		gc.strokeText(String.format("speedX = %.2f\n speedY = %.2f\n", speedX, speedY), x - 10, y);
 	}
 
 	private Image getCurrentAnimationFrame() {
