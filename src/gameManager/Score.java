@@ -33,6 +33,10 @@ public class Score implements Renderable{
 		return score;
 	}
 	
+	public static void resetScore() {
+		score=0;
+	}
+	
 	
 	
 }

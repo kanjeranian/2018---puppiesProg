@@ -171,7 +171,7 @@ public class AllObj extends AllObjList implements Renderable{
 	}
 	
 	public static void resetScore() {
-		score = new Score();
+		score.resetScore();
 	}
 	
 
